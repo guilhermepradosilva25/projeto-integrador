@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Projeto Integrador — Dispersão da luz por meio da refração: óptica, robótica e acessibilidade no estudo do espectro eletromagnético.">
-<title>Dispersão da Luz · Projeto Integrador — Equipe Espectro</title>
+<meta name="description" content="Projeto Integrador — Dispersão da luz por meio da refração: óptica, robótica e acessibilidade no estudo do espectro eletromagnético. Turma 2 P.">
+<title>Dispersão da Luz · Projeto Integrador — Equipe Espectro · Turma 2 P</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -327,7 +327,7 @@ body.rm html{scroll-behavior:auto}
 <section class="hero" id="inicio" aria-label="Abertura — dispersão da luz">
   <canvas id="prism" aria-hidden="true"></canvas>
   <div class="wrap">
-    <p class="kick" data-scramble>Projeto Integrador · 2026</p>
+    <p class="kick" data-scramble>Projeto Integrador · Turma 2 P · 2026</p>
     <h1 class="hero-title" aria-label="Dispersão da luz por meio da refração">
       <span aria-hidden="true"><b style="--c:var(--red)">D</b><b style="--c:var(--orange)">I</b><b style="--c:var(--yellow)">S</b><b style="--c:var(--green)">P</b><b style="--c:var(--cyan)">E</b><b style="--c:var(--blue)">R</b><b style="--c:var(--violet)">S</b><b style="--c:var(--red)">Ã</b><b style="--c:var(--orange)">O</b></span>
     </h1>
@@ -348,7 +348,7 @@ body.rm html{scroll-behavior:auto}
   </div>
   <svg class="badge" viewBox="0 0 130 130" aria-hidden="true">
     <defs><path id="circ" d="M65,65 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/></defs>
-    <text><textPath href="#circ">PROJETO INTEGRADOR • ÓPTICA • 2026 •&#160;</textPath></text>
+    <text><textPath href="#circ">PROJETO INTEGRADOR • ÓPTICA • TURMA 2 P • 2026 •&#160;</textPath></text>
     <path d="M65 48 80 78 50 78 Z" fill="none" stroke="url(#lg)" stroke-width="2"/>
   </svg>
 </section>
@@ -676,12 +676,12 @@ telemetria.<span class="f">enviar</span>(dados)</code></pre>
 <!-- ================= EQUIPE ================= -->
 <section id="equipe" style="padding-top:0">
   <div class="wrap credits">
-    <p class="kick">07 / Equipe Espectro</p>
+    <p class="kick">07 / Equipe Espectro · Turma 2 P</p>
     <h2 class="h2 lm"><span>Quem refracionou essa ideia</span></h2>
-    <div class="credit-row rv"><span class="role">Óptica &amp; conteúdo científico</span><span class="name">Ana Ferreira</span></div>
-    <div class="credit-row rv" style="--d:.06s"><span class="role">Firmware &amp; sensores</span><span class="name">Bruno Souza</span></div>
-    <div class="credit-row rv" style="--d:.12s"><span class="role">Front-end &amp; simuladores</span><span class="name">Carla Lima</span></div>
-    <div class="credit-row rv" style="--d:.18s"><span class="role">Design &amp; experiência do usuário</span><span class="name">Diego Santos</span></div>
+    <div class="credit-row rv"><span class="role">Óptica &amp; conteúdo científico</span><span class="name">Guilherme Pietro Prado da Silva</span></div>
+    <div class="credit-row rv" style="--d:.06s"><span class="role">Firmware &amp; sensores</span><span class="name">Mateus Palmeiro Fedalto</span></div>
+    <div class="credit-row rv" style="--d:.12s"><span class="role">Front-end &amp; simuladores</span><span class="name">Constanza Miessa Haygert</span></div>
+    <div class="credit-row rv" style="--d:.18s"><span class="role">Design &amp; experiência do usuário</span><span class="name">Valentina Rodrigues Perottoni</span></div>
   </div>
 </section>
 </main>
@@ -692,7 +692,7 @@ telemetria.<span class="f">enviar</span>(dados)</code></pre>
     <div class="f-grid">
       <div>
         <h4>Equipe Espectro · Projeto Integrador 2026</h4>
-        <p style="color:var(--muted);font-size:.9rem;max-width:36ch">Dispersão da luz por meio da refração: óptica, robótica e acessibilidade no estudo do espectro eletromagnético.</p>
+        <p style="color:var(--muted);font-size:.9rem;max-width:36ch">Dispersão da luz por meio da refração: óptica, robótica e acessibilidade no estudo do espectro eletromagnético. Turma 2 P.</p>
       </div>
       <div>
         <h4>Mapa do site</h4>
@@ -716,7 +716,7 @@ telemetria.<span class="f">enviar</span>(dados)</code></pre>
       </div>
     </div>
     <div class="f-note">
-      <span>© 2026 Equipe Espectro — feito à mão com HTML + CSS + JavaScript puros.</span>
+      <span>© 2026 Equipe Espectro · Turma 2 P — feito à mão com HTML + CSS + JavaScript puros.</span>
       <span>n₁·sen θ₁ = n₂·sen θ₂ ✦ λ ∈ [380, 750] nm</span>
     </div>
   </div>
@@ -822,17 +822,13 @@ if(hc){
     const T=[cx,cy-s], A=[cx-s,cy+s*.66], B=[cx+s,cy+s*.66];
     const f=.46, P1=[T[0]+(A[0]-T[0])*f, T[1]+(A[1]-T[1])*f+my*.3];
     const P2=[T[0]+(B[0]-T[0])*.52, T[1]+(B[1]-T[1])*.52+my*.2];
-    // prisma
     ctx.beginPath(); ctx.moveTo(...T); ctx.lineTo(...A); ctx.lineTo(...B); ctx.closePath();
     ctx.fillStyle="rgba(150,170,255,.06)"; ctx.fill();
     ctx.strokeStyle="rgba(185,200,255,.55)"; ctx.lineWidth=1.6; ctx.stroke();
-    // feixe branco
     const src=[-20, P1.y-(H*.06)+my];
     ctx.save(); ctx.shadowColor="rgba(255,255,255,.9)"; ctx.shadowBlur=16;
     ctx.strokeStyle="#fff"; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(...src); ctx.lineTo(...P1); ctx.stroke(); ctx.restore();
-    // interior
     ctx.strokeStyle="rgba(255,255,255,.35)"; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(...P1); ctx.lineTo(...P2); ctx.stroke();
-    // raios dispersos + fótons
     const base=Math.atan2(.06*H, W*.4)+my*.002;
     SPEC.forEach((c,i)=>{
       const ang=base+(i-3)*(0.045+Math.abs(my)*0.0004);
@@ -870,25 +866,20 @@ if(rc){
     rctx.clearRect(0,0,w,h);
     rctx.fillStyle="rgba(120,150,255,.035)"; rctx.fillRect(0,0,w,y0);
     rctx.fillStyle="rgba(61,220,255,.06)"; rctx.fillRect(0,y0,w,h-y0);
-    // interface + normal
     rctx.strokeStyle="rgba(255,255,255,.5)"; rctx.lineWidth=1.4;
     rctx.beginPath(); rctx.moveTo(0,y0); rctx.lineTo(w,y0); rctx.stroke();
     rctx.setLineDash([5,7]); rctx.strokeStyle="rgba(255,255,255,.28)";
     rctx.beginPath(); rctx.moveTo(X,20); rctx.lineTo(X,h-20); rctx.stroke(); rctx.setLineDash([]);
-    // incidente
     const sx=X-L*Math.sin(th1), sy=y0-L*Math.cos(th1);
     rctx.save(); rctx.shadowColor="rgba(255,255,255,.8)"; rctx.shadowBlur=12;
     rctx.strokeStyle="#fff"; rctx.lineWidth=3;
     rctx.beginPath(); rctx.moveTo(sx,sy); rctx.lineTo(X,y0); rctx.stroke(); rctx.restore();
-    // refletido (parcial)
     rctx.strokeStyle="rgba(255,255,255,.16)"; rctx.lineWidth=2;
     rctx.beginPath(); rctx.moveTo(X,y0); rctx.lineTo(X+L*Math.sin(th1), y0-L*Math.cos(th1)); rctx.stroke();
-    // índices e ângulos por cor
     const nr=nAt(.65), nv=nAt(.41);
     const t2r=Math.asin(Math.sin(th1)/nr), t2v=Math.asin(Math.sin(th1)/nv);
     const t2c=(t2r+t2v)/2, delta=t2v-t2r;
     const dDraw=amp.checked?Math.max(delta*40,.07):delta;
-    // leque
     for(let i=0;i<7;i++){
       const t=t2c+(i/6-.5)*dDraw;
       const ex=X+L*Math.sin(t), ey=y0+L*Math.cos(t);
@@ -896,12 +887,10 @@ if(rc){
       rctx.strokeStyle=SPEC[i]; rctx.lineWidth=2.4;
       rctx.beginPath(); rctx.moveTo(X,y0); rctx.lineTo(ex,ey); rctx.stroke(); rctx.restore();
     }
-    // arcos
     rctx.strokeStyle="rgba(255,217,77,.8)"; rctx.lineWidth=1.4;
     rctx.beginPath(); rctx.arc(X,y0,58,-Math.PI/2,-Math.PI/2-th1,true); rctx.stroke();
     rctx.strokeStyle="rgba(61,220,255,.8)";
     rctx.beginPath(); rctx.arc(X,y0,58,Math.PI/2,Math.PI/2-t2c,true); rctx.stroke();
-    // rótulos
     rctx.font="12px JetBrains Mono, monospace"; rctx.fillStyle="#cfd5ea";
     rctx.fillText("AR · n₁ = 1,000", 18, 30);
     rctx.fillText(mName.toUpperCase()+" · n ≈ "+fmt(nBase,3), 18, h-18);
