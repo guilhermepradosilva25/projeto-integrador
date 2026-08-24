@@ -61,7 +61,6 @@
     border-radius: 4px;
   }
 
-  /* Animações */
   .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -73,7 +72,6 @@
   .reveal-direita { transform: translateX(50px); }
   .reveal-esquerda.visivel, .reveal-direita.visivel { transform: translateX(0); }
 
-  /* Header */
   header {
     position: sticky;
     top: 0;
@@ -104,8 +102,7 @@
   }
 
   .logo-icon {
-    width: 45px;
-    height: 45px;
+    width: 45px; height: 45px;
     background: linear-gradient(135deg, var(--amarelo), var(--rosa));
     border-radius: 50%;
     display: flex;
@@ -120,13 +117,7 @@
     50% { box-shadow: 0 0 25px var(--rosa), 0 0 40px var(--amarelo); }
   }
 
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
+  nav ul { list-style: none; display: flex; gap: 1rem; flex-wrap: wrap; }
   nav a {
     color: var(--header-text);
     text-decoration: none;
@@ -135,7 +126,6 @@
     border-radius: 6px;
     transition: background var(--transicao);
   }
-
   nav a:hover, nav a:focus { background: rgba(255, 255, 255, 0.2); }
 
   .header-actions { display: flex; gap: 0.5rem; }
@@ -154,7 +144,6 @@
   .icon-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
   .menu-toggle { display: none; }
 
-  /* Hero */
   .hero {
     background: linear-gradient(135deg, #3a0ca3, #7209b7, #f72585);
     background-size: 400% 400%;
@@ -170,14 +159,6 @@
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.3;
   }
 
   .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
@@ -224,7 +205,6 @@
     box-shadow: 0 8px 25px rgba(251, 86, 7, 0.6);
   }
 
-  /* Seções */
   section {
     padding: 4rem 1.5rem;
     max-width: 1200px;
@@ -261,7 +241,6 @@
     font-size: 1.15rem;
   }
 
-  /* Cards */
   .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -279,10 +258,7 @@
     color: var(--cinza-texto);
   }
 
-  .card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--sombra-forte);
-  }
+  .card:hover { transform: translateY(-8px); box-shadow: var(--sombra-forte); }
 
   .card-icon {
     width: 70px; height: 70px;
@@ -296,15 +272,9 @@
     color: var(--branco);
   }
 
-  .card h3 {
-    color: var(--roxo-profundo);
-    margin-bottom: 0.8rem;
-    font-size: 1.3rem;
-  }
-
+  .card h3 { color: var(--roxo-profundo); margin-bottom: 0.8rem; font-size: 1.3rem; }
   body.modo-escuro .card h3 { color: var(--ciano); }
 
-  /* Simulador de Prisma */
   .simulador-container {
     background: var(--cinza-card);
     padding: 3rem 2rem;
@@ -348,11 +318,7 @@
   }
 
   body.modo-escuro .controle-item label { color: var(--ciano); }
-
-  .controle-item input[type="range"] {
-    width: 100%;
-    accent-color: var(--roxo-medio);
-  }
+  .controle-item input[type="range"] { width: 100%; accent-color: var(--roxo-medio); }
 
   .valor-display {
     display: inline-block;
@@ -364,7 +330,6 @@
     margin-left: 0.5rem;
   }
 
-  /* Arco-íris Interativo */
   .arcoiris-section {
     background: linear-gradient(135deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
     background-size: 700% 700%;
@@ -401,7 +366,6 @@
   .arcoiris-content h2 { color: white; }
   .arcoiris-content h2::after { background: white; }
 
-  /* Quiz */
   .quiz-container {
     background: var(--cinza-card);
     padding: 2.5rem;
@@ -468,11 +432,7 @@
     gap: 0.8rem;
   }
 
-  .quiz-opcao:hover:not(:disabled) {
-    border-color: var(--roxo-medio);
-    transform: translateX(5px);
-  }
-
+  .quiz-opcao:hover:not(:disabled) { border-color: var(--roxo-medio); transform: translateX(5px); }
   .quiz-opcao:disabled { cursor: not-allowed; }
 
   .quiz-opcao.correta {
@@ -540,11 +500,7 @@
     font-family: inherit;
   }
 
-  .quiz-btn:hover:not(:disabled) {
-    background: var(--roxo-profundo);
-    transform: translateY(-2px);
-  }
-
+  .quiz-btn:hover:not(:disabled) { background: var(--roxo-profundo); transform: translateY(-2px); }
   .quiz-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
   .quiz-resultado { text-align: center; padding: 2rem 1rem; }
@@ -552,70 +508,6 @@
   .quiz-placar { font-size: 3rem; font-weight: bold; color: var(--amarelo); margin: 1rem 0; }
   .quiz-msg { font-size: 1.1rem; margin-bottom: 1.5rem; }
 
-  /* Experimento Caseiro */
-  .experimento-box {
-    background: linear-gradient(135deg, var(--roxo-profundo), var(--roxo-medio));
-    color: white;
-    padding: 3rem 2rem;
-    border-radius: 20px;
-    margin-top: 2rem;
-    box-shadow: var(--sombra-forte);
-  }
-
-  .experimento-box h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  .materiais-lista {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0;
-  }
-
-  .material-item {
-    background: rgba(255,255,255,0.15);
-    padding: 1rem;
-    border-radius: 12px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-  }
-
-  .material-item .icone { font-size: 2rem; margin-bottom: 0.5rem; }
-
-  .passos {
-    background: rgba(255,255,255,0.1);
-    padding: 2rem;
-    border-radius: 12px;
-    margin-top: 1.5rem;
-  }
-
-  .passo {
-    margin-bottom: 1rem;
-    padding-left: 2rem;
-    position: relative;
-  }
-
-  .passo::before {
-    content: attr(data-numero);
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: var(--amarelo);
-    color: var(--roxo-profundo);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 0.9rem;
-  }
-
-  /* Footer */
   footer {
     background: var(--roxo-profundo);
     color: white;
@@ -626,15 +518,22 @@
 
   body.modo-escuro footer { background: #0a0a1a; }
 
-  /* Responsividade */
+  .grupo-info {
+    background: rgba(255,255,255,0.15);
+    padding: 1rem;
+    border-radius: 12px;
+    margin: 1rem auto;
+    max-width: 700px;
+    backdrop-filter: blur(10px);
+  }
+
+  .grupo-info h4 { color: var(--amarelo); margin-bottom: 0.5rem; }
+  .grupo-info ul { list-style: none; padding: 0; }
+  .grupo-info li { padding: 0.2rem 0; font-size: 0.95rem; }
+
   @media (max-width: 768px) {
     .menu-toggle { display: block; }
-    nav ul {
-      display: none;
-      width: 100%;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
+    nav ul { display: none; width: 100%; flex-direction: column; gap: 0.5rem; }
     nav ul.ativo { display: flex; }
     nav a { display: block; padding: 0.8rem; text-align: center; }
     section { padding: 3rem 1rem; }
@@ -668,7 +567,7 @@
       <span>Dispersão da Luz</span>
     </div>
     <div class="header-actions">
-      <button class="icon-btn" id="themeToggle" aria-label="Ativar modo escuro" title="Alternar tema"></button>
+      <button class="icon-btn" id="themeToggle" aria-label="Ativar modo escuro" title="Alternar tema">🌙</button>
       <button class="icon-btn menu-toggle" aria-label="Abrir menu" aria-expanded="false" id="menuBtn">☰</button>
     </div>
     <nav aria-label="Navegação principal">
@@ -679,7 +578,6 @@
         <li><a href="#arcoiris">Arco-íris</a></li>
         <li><a href="#aplicacoes">Aplicações</a></li>
         <li><a href="#quiz">Quiz</a></li>
-        <li><a href="#experimento">Experimento</a></li>
       </ul>
     </nav>
   </div>
@@ -688,14 +586,14 @@
 <main id="conteudo">
 <section class="hero" aria-labelledby="titulo-hero">
   <div class="hero-content">
-    <h1 id="titulo-hero"> Dispersão da Luz por Refração</h1>
+    <h1 id="titulo-hero">🌈 Dispersão da Luz por Refração</h1>
     <p>Descubra como a luz branca se decompõe em cores ao atravessar diferentes meios, criando fenômenos fascinantes como o arco-íris e permitindo tecnologias revolucionárias.</p>
     <a href="#conceito" class="btn">Explorar o Fenômeno</a>
   </div>
 </section>
 
 <section id="conceito" aria-labelledby="titulo-conceito">
-  <h2 id="titulo-conceito" class="reveal"> O que é Dispersão da Luz?</h2>
+  <h2 id="titulo-conceito" class="reveal">🔍 O que é Dispersão da Luz?</h2>
   <p class="section-intro reveal">A dispersão da luz é o fenômeno óptico no qual a luz branca (policromática) se decompõe em suas diferentes cores ao atravessar um meio transparente, devido à variação do índice de refração com o comprimento de onda.</p>
 
   <div class="cards-grid">
@@ -705,7 +603,7 @@
       <p>A luz do Sol ou de uma lâmpada comum parece branca, mas na verdade é composta por <strong>todas as cores do espectro visível</strong> (vermelho, laranja, amarelo, verde, azul, anil e violeta).</p>
     </article>
     <article class="card reveal">
-      <div class="card-icon" aria-hidden="true"></div>
+      <div class="card-icon" aria-hidden="true">📐</div>
       <h3>Índice de Refração</h3>
       <p>Cada cor tem um <strong>comprimento de onda diferente</strong>. O violeta (menor comprimento) refrata mais que o vermelho (maior comprimento), causando a separação das cores.</p>
     </article>
@@ -715,7 +613,7 @@
       <p>As cores separadas formam um <strong>espectro contínuo</strong>, indo do vermelho (700 nm) ao violeta (400 nm), passando por todas as cores intermediárias.</p>
     </article>
     <article class="card reveal">
-      <div class="card-icon" aria-hidden="true"></div>
+      <div class="card-icon" aria-hidden="true">📜</div>
       <h3>Descoberta Histórica</h3>
       <p><strong>Isaac Newton</strong> (1666) foi o primeiro a demonstrar experimentalmente a dispersão da luz usando um prisma de vidro, revolucionando o estudo da óptica.</p>
     </article>
@@ -726,7 +624,7 @@
   <h2 id="titulo-refracao" class="reveal">📐 Refração: A Base da Dispersão</h2>
   <p class="section-intro reveal">A refração é a mudança de direção e velocidade da luz ao passar de um meio para outro. Quando combinada com a dependência do comprimento de onda, temos a dispersão.</p>
 
-  <div class="optica-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 2rem;">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 2rem;">
     <div class="reveal reveal-esquerda">
       <h3 style="color: var(--roxo-profundo); margin-bottom: 1rem;">Lei de Snell-Descartes</h3>
       <p>A refração obedece à lei: <strong style="color: var(--roxo-medio); font-size: 1.2rem;">n₁·sen(θ₁) = n₂·sen(θ₂)</strong></p>
@@ -753,10 +651,10 @@
 
 <section id="simulador" aria-labelledby="titulo-simulador">
   <h2 id="titulo-simulador" class="reveal">🎮 Simulador de Prisma Interativo</h2>
-  <p class="section-intro reveal">Ajuste os parâmetros e veja como a luz branca se dispersa ao atravessar um prisma de vidro!</p>
+  <p class="section-intro reveal">Ajuste os parâmetros e veja como a luz branca se dispersa nas cores do arco-íris ao atravessar um prisma de vidro!</p>
 
-  <div class="simulador-container reveal reveal-escala">
-    <canvas id="prismaCanvas" class="simulador-canvas" width="900" height="450" role="img" aria-label="Simulação interativa de dispersão da luz em um prisma"></canvas>
+  <div class="simulador-container reveal">
+    <canvas id="prismaCanvas" class="simulador-canvas" width="900" height="450" role="img" aria-label="Simulação interativa de dispersão da luz em um prisma mostrando as cores do arco-íris"></canvas>
     
     <div class="controles-simulador">
       <div class="controle-item">
@@ -822,17 +720,17 @@
       <p>Instrumentos que analisam a luz dispersa para identificar <strong>elementos químicos</strong> em estrelas, laboratórios e até na atmosfera de planetas distantes.</p>
     </article>
     <article class="card reveal">
-      <div class="card-icon" aria-hidden="true">📡</div>
+      <div class="card-icon" aria-hidden="true"></div>
       <h3>Fibras Ópticas</h3>
       <p>A dispersão cromática é um <strong>desafio</strong> nas telecomunicações, limitando a velocidade de transmissão. Engenheiros desenvolvem fibras especiais para minimizá-la.</p>
     </article>
     <article class="card reveal">
-      <div class="card-icon" aria-hidden="true">📷</div>
+      <div class="card-icon" aria-hidden="true"></div>
       <h3>Lentes e Câmeras</h3>
       <p>A <strong>aberração cromática</strong> (dispersão indesejada em lentes) é corrigida com lentes compostas (acromáticas) em câmeras e telescópios profissionais.</p>
     </article>
     <article class="card reveal">
-      <div class="card-icon" aria-hidden="true"></div>
+      <div class="card-icon" aria-hidden="true">🎭</div>
       <h3>Efeitos Especiais</h3>
       <p>Prismas e redes de difração criam <strong>efeitos visuais</strong> em shows, cinemas e instalações artísticas, explorando a beleza da dispersão da luz.</p>
     </article>
@@ -843,7 +741,7 @@
   <h2 id="titulo-quiz" class="reveal">🧠 Quiz: Teste seu Conhecimento</h2>
   <p class="section-intro reveal">Você entendeu como funciona a dispersão da luz? Responda às 5 perguntas e descubra!</p>
 
-  <div class="quiz-container reveal reveal-escala" id="quizContainer" aria-live="polite">
+  <div class="quiz-container reveal" id="quizContainer" aria-live="polite">
     <div class="quiz-progresso">
       <span id="quizContador">Pergunta 1 de 5</span>
       <div class="quiz-barra" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="1">
@@ -869,63 +767,19 @@
     </div>
   </div>
 </section>
-
-<section id="experimento" aria-labelledby="titulo-experimento">
-  <h2 id="titulo-experimento" class="reveal"> Experimento Caseiro</h2>
-  <p class="section-intro reveal">Faça você mesmo um experimento simples para observar a dispersão da luz em casa!</p>
-
-  <div class="experimento-box reveal">
-    <h3>🌈 Criando um Arco-íris com um CD</h3>
-    <p style="text-align: center; margin-bottom: 1.5rem; font-size: 1.1rem;">
-      Um CD ou DVD antigo funciona como uma <strong>rede de difração</strong>, separando a luz branca em cores!
-    </p>
-
-    <h4 style="margin-bottom: 1rem;">📦 Materiais Necessários:</h4>
-    <div class="materiais-lista">
-      <div class="material-item">
-        <div class="icone">💿</div>
-        <div>CD ou DVD velho</div>
-      </div>
-      <div class="material-item">
-        <div class="icone">🔦</div>
-        <div>Lanterna ou luz solar</div>
-      </div>
-      <div class="material-item">
-        <div class="icone">📄</div>
-        <div>Folha de papel branco</div>
-      </div>
-      <div class="material-item">
-        <div class="icone">✂️</div>
-        <div>Tesoura (opcional)</div>
-      </div>
-    </div>
-
-    <div class="passos">
-      <h4 style="margin-bottom: 1rem;">📝 Passo a Passo:</h4>
-      <div class="passo" data-numero="1">
-        <strong>Posicione o CD:</strong> Segure o CD com a face refletiva voltada para você, em um ângulo de aproximadamente 45°.
-      </div>
-      <div class="passo" data-numero="2">
-        <strong>Ilumine:</strong> Aponte a lanterna (ou use a luz do Sol) para a superfície do CD.
-      </div>
-      <div class="passo" data-numero="3">
-        <strong>Observe:</strong> Mova o CD lentamente e observe as cores do arco-íris refletidas na parede ou no papel branco.
-      </div>
-      <div class="passo" data-numero="4">
-        <strong>Experimente:</strong> Tente diferentes ângulos e distâncias para ver como o espectro muda!
-      </div>
-    </div>
-
-    <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem;">
-      <strong> Explicação Científica:</strong><br>
-      As trilhas microscópicas do CD (que armazenam dados) atuam como uma <strong>rede de difração</strong>. Quando a luz incide sobre elas, ocorre interferência construtiva e destrutiva, separando as cores de forma ainda mais eficiente que um prisma!
-    </div>
-  </div>
-</section>
 </main>
 
 <footer>
   <p><strong>🌈 Dispersão da Luz</strong> — Projeto Integrador CEP 2026</p>
+  <div class="grupo-info">
+    <h4>👥 Grupo 3</h4>
+    <ul>
+      <li>👤 Guilherme Pietro Prado da Silva</li>
+      <li>👤 Valentina Rodrigues Perottoni</li>
+      <li> Mateus Palmeiro Fedalto</li>
+      <li>👤 Constanza Miessa Haygert</li>
+    </ul>
+  </div>
   <p>Desenvolvido com 💜 pela equipe de Física e Óptica da Escola CEP</p>
   <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
     © 2026 — Explorando as cores da ciência
@@ -933,7 +787,6 @@
 </footer>
 
 <script>
-  // Menu Mobile
   const menuBtn = document.getElementById('menuBtn');
   const menuNav = document.getElementById('menuNav');
 
@@ -949,7 +802,6 @@
     });
   });
 
-  // Modo Escuro
   const themeToggle = document.getElementById('themeToggle');
   const body = document.body;
 
@@ -963,13 +815,12 @@
   themeToggle.addEventListener('click', () => {
     body.classList.toggle('modo-escuro');
     const escuro = body.classList.contains('modo-escuro');
-    themeToggle.textContent = escuro ? '☀️' : '';
+    themeToggle.textContent = escuro ? '☀️' : '🌙';
     themeToggle.setAttribute('aria-label', escuro ? 'Ativar modo claro' : 'Ativar modo escuro');
     localStorage.setItem('tema', escuro ? 'escuro' : 'claro');
-    desenharPrisma(); // Redesenha o prisma no novo tema
+    desenharPrisma();
   });
 
-  // Animações de Scroll
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -981,7 +832,7 @@
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // Simulador de Prisma
+  // ===== SIMULADOR DE PRISMA COM CORES DO ARCO-ÍRIS =====
   const canvas = document.getElementById('prismaCanvas');
   const ctx = canvas.getContext('2d');
 
@@ -993,37 +844,43 @@
   const valIndice = document.getElementById('valIndice');
   const valLargura = document.getElementById('valLargura');
 
-  // Cores do espectro
-  const coresEspectro = [
-    { cor: '#ff0000', nome: 'Vermelho', lambda: 700, n: 1.51 },
-    { cor: '#ff7f00', nome: 'Laranja', lambda: 620, n: 1.513 },
-    { cor: '#ffff00', nome: 'Amarelo', lambda: 580, n: 1.515 },
-    { cor: '#00ff00', nome: 'Verde', lambda: 530, n: 1.517 },
-    { cor: '#0000ff', nome: 'Azul', lambda: 470, n: 1.52 },
-    { cor: '#4b0082', nome: 'Anil', lambda: 440, n: 1.522 },
-    { cor: '#9400d3', nome: 'Violeta', lambda: 400, n: 1.525 }
+  // Cores do arco-íris com índices de refração realistas
+  const coresArcoIris = [
+    { cor: '#FF0000', nome: 'Vermelho', lambda: 700, desvio: 0.00 },
+    { cor: '#FF7F00', nome: 'Laranja', lambda: 620, desvio: 0.02 },
+    { cor: '#FFFF00', nome: 'Amarelo', lambda: 580, desvio: 0.04 },
+    { cor: '#00FF00', nome: 'Verde', lambda: 530, desvio: 0.06 },
+    { cor: '#0000FF', nome: 'Azul', lambda: 470, desvio: 0.08 },
+    { cor: '#4B0082', nome: 'Anil', lambda: 440, desvio: 0.10 },
+    { cor: '#9400D3', nome: 'Violeta', lambda: 400, desvio: 0.12 }
   ];
 
   function desenharPrisma() {
     const isDark = body.classList.contains('modo-escuro');
     
-    // Limpar canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Fundo
-    ctx.fillStyle = isDark ? '#1e1e32' : '#f8f9fa';
+    const gradFundo = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    if (isDark) {
+      gradFundo.addColorStop(0, '#1e1e32');
+      gradFundo.addColorStop(1, '#2d2d5a');
+    } else {
+      gradFundo.addColorStop(0, '#f8f9fa');
+      gradFundo.addColorStop(1, '#e9ecef');
+    }
+    ctx.fillStyle = gradFundo;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
+    const centerY = canvas.height / 2 + 20;
 
-    // Parâmetros
     const anguloIncidencia = parseFloat(anguloInput.value);
     const indiceBase = parseFloat(indiceInput.value);
     const larguraFeixe = parseFloat(larguraInput.value);
 
     // Desenhar prisma (triângulo equilátero)
-    const ladoPrisma = 150;
+    const ladoPrisma = 180;
     const alturaPrisma = ladoPrisma * Math.sqrt(3) / 2;
     
     ctx.beginPath();
@@ -1032,99 +889,151 @@
     ctx.lineTo(centerX + ladoPrisma / 2, centerY + alturaPrisma / 2);
     ctx.closePath();
     
-    ctx.fillStyle = isDark ? 'rgba(72, 201, 244, 0.2)' : 'rgba(120, 180, 240, 0.3)';
+    const gradPrisma = ctx.createLinearGradient(centerX, centerY - alturaPrisma / 2, centerX, centerY + alturaPrisma / 2);
+    if (isDark) {
+      gradPrisma.addColorStop(0, 'rgba(72, 201, 244, 0.3)');
+      gradPrisma.addColorStop(1, 'rgba(72, 201, 244, 0.1)');
+    } else {
+      gradPrisma.addColorStop(0, 'rgba(120, 180, 240, 0.4)');
+      gradPrisma.addColorStop(1, 'rgba(120, 180, 240, 0.2)');
+    }
+    ctx.fillStyle = gradPrisma;
     ctx.fill();
     ctx.strokeStyle = isDark ? '#48cae4' : '#3a0ca3';
     ctx.lineWidth = 3;
     ctx.stroke();
 
-    // Desenhar feixes de luz
+    // Ponto de entrada da luz
+    const pontoEntradaX = centerX - ladoPrisma / 2;
+    const pontoEntradaY = centerY - alturaPrisma / 6;
+
+    // Desenhar feixe de luz branca incidente
     const anguloRad = (anguloIncidencia * Math.PI) / 180;
-    const pontoEntradaX = centerX - ladoPrisma / 2 - 100;
-    const pontoEntradaY = centerY;
+    const distanciaEntrada = 200;
+    const inicioX = pontoEntradaX - Math.cos(anguloRad) * distanciaEntrada;
+    const inicioY = pontoEntradaY + Math.sin(anguloRad) * distanciaEntrada;
 
-    coresEspectro.forEach((cor, index) => {
-      // Calcular índice de refração específico para esta cor
-      const n = indiceBase + (cor.n - 1.52) * 0.5;
-      
-      // Lei de Snell: sen(θ2) = sen(θ1) / n
-      const anguloRefacao = Math.asin(Math.sin(anguloRad) / n);
-      
-      // Calcular ponto de saída do prisma
-      const deslocamentoY = Math.tan(anguloRefacao) * ladoPrisma;
-      const pontoSaidaX = centerX + ladoPrisma / 2;
-      const pontoSaidaY = pontoEntradaY + deslocamentoY * 0.5;
-
-      // Desenhar raio incidente (antes do prisma)
-      ctx.beginPath();
-      ctx.moveTo(pontoEntradaX, pontoEntradaY);
-      ctx.lineTo(centerX - ladoPrisma / 2, pontoEntradaY);
-      ctx.strokeStyle = index === 0 ? 'rgba(255,255,255,0.6)' : cor.cor;
-      ctx.lineWidth = index === 0 ? larguraFeixe : 2;
-      if (index === 0) ctx.setLineDash([5, 5]);
-      else ctx.setLineDash([]);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Desenhar raio dentro do prisma
-      ctx.beginPath();
-      ctx.moveTo(centerX - ladoPrisma / 2, pontoEntradaY);
-      ctx.lineTo(centerX + ladoPrisma / 2, pontoEntradaY + deslocamentoY * 0.3);
-      ctx.strokeStyle = cor.cor;
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      // Desenhar raio emergente (após o prisma)
-      ctx.beginPath();
-      ctx.moveTo(centerX + ladoPrisma / 2, pontoEntradaY + deslocamentoY * 0.3);
-      ctx.lineTo(canvas.width - 50, pontoSaidaY);
-      ctx.strokeStyle = cor.cor;
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      // Desenhar ponto brilhante no final
-      ctx.beginPath();
-      ctx.arc(canvas.width - 50, pontoSaidaY, 4, 0, Math.PI * 2);
-      ctx.fillStyle = cor.cor;
-      ctx.fill();
-    });
-
-    // Desenhar luz branca incidente
+    // Feixe branco incidente
     ctx.beginPath();
-    ctx.moveTo(pontoEntradaX - 20, pontoEntradaY);
+    ctx.moveTo(inicioX, inicioY);
     ctx.lineTo(pontoEntradaX, pontoEntradaY);
     ctx.strokeStyle = '#ffffff';
     ctx.lineWidth = larguraFeixe;
-    ctx.setLineDash([5, 5]);
+    ctx.shadowColor = 'rgba(255,255,255,0.5)';
+    ctx.shadowBlur = 10;
     ctx.stroke();
-    ctx.setLineDash([]);
+    ctx.shadowBlur = 0;
 
     // Label "Luz Branca"
     ctx.fillStyle = isDark ? '#e8e8f0' : '#212529';
     ctx.font = 'bold 14px Segoe UI';
     ctx.textAlign = 'center';
-    ctx.fillText('Luz Branca', pontoEntradaX - 60, pontoEntradaY - 15);
+    ctx.fillText('☀️ Luz Branca', inicioX - 30, inicioY - 10);
+
+    // Desenhar cada cor do arco-íris
+    const espacamentoSaida = 12;
+    
+    coresArcoIris.forEach((cor, index) => {
+      // Calcular índice de refração específico para esta cor
+      const n = indiceBase + cor.desvio;
+      
+      // Lei de Snell: sen(θ2) = sen(θ1) / n
+      const anguloRefacao = Math.asin(Math.min(1, Math.sin(anguloRad) / n));
+      
+      // Direção dentro do prisma
+      const normalEntrada = Math.PI / 2; // Normal da face esquerda
+      const anguloInterno = normalEntrada - anguloRefacao;
+      
+      // Ponto dentro do prisma (direção aproximada)
+      const distanciaInterna = ladoPrisma * 0.8;
+      const pontoInternoX = pontoEntradaX + Math.cos(anguloInterno) * distanciaInterna;
+      const pontoInternoY = pontoEntradaY + Math.sin(anguloInterno) * distanciaInterna;
+
+      // Ponto de saída na face direita
+      const pontoSaidaX = centerX + ladoPrisma / 2;
+      const pontoSaidaY = pontoInternoY;
+
+      // Ângulo de saída (mais dispersão)
+      const anguloSaida = anguloRefacao + cor.desvio * 2;
+      const distanciaSaida = 250;
+      const fimX = pontoSaidaX + Math.cos(anguloSaida) * distanciaSaida;
+      const fimY = pontoSaidaY + Math.sin(anguloSaida) * distanciaSaida + (index - 3) * espacamentoSaida;
+
+      // Desenhar raio dentro do prisma
+      ctx.beginPath();
+      ctx.moveTo(pontoEntradaX, pontoEntradaY);
+      ctx.lineTo(pontoSaidaX, pontoSaidaY);
+      ctx.strokeStyle = cor.cor;
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = 0.6;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      // Desenhar raio emergente (após o prisma)
+      ctx.beginPath();
+      ctx.moveTo(pontoSaidaX, pontoSaidaY);
+      ctx.lineTo(fimX, fimY);
+      ctx.strokeStyle = cor.cor;
+      ctx.lineWidth = 3;
+      ctx.shadowColor = cor.cor;
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Desenhar ponto brilhante no final
+      ctx.beginPath();
+      ctx.arc(fimX, fimY, 5, 0, Math.PI * 2);
+      ctx.fillStyle = cor.cor;
+      ctx.shadowColor = cor.cor;
+      ctx.shadowBlur = 15;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      // Label da cor
+      ctx.fillStyle = cor.cor;
+      ctx.font = 'bold 12px Segoe UI';
+      ctx.textAlign = 'left';
+      ctx.fillText(cor.nome, fimX + 10, fimY + 4);
+    });
 
     // Label "Prisma"
-    ctx.fillText('Prisma', centerX, centerY + alturaPrisma / 2 + 30);
+    ctx.fillStyle = isDark ? '#e8e8f0' : '#212529';
+    ctx.font = 'bold 16px Segoe UI';
+    ctx.textAlign = 'center';
+    ctx.fillText(' Prisma de Vidro', centerX, centerY + alturaPrisma / 2 + 30);
 
-    // Label "Espectro"
-    ctx.fillText('Espectro', canvas.width - 100, centerY - 80);
-
-    // Desenhar ângulo
+    // Desenhar ângulo de incidência
     ctx.beginPath();
-    ctx.arc(centerX - ladoPrisma / 2, pontoEntradaY, 40, -Math.PI, -Math.PI + anguloRad);
+    ctx.arc(pontoEntradaX, pontoEntradaY, 40, Math.PI, Math.PI + anguloRad);
     ctx.strokeStyle = '#fb5607';
     ctx.lineWidth = 2;
     ctx.stroke();
 
     ctx.fillStyle = '#fb5607';
-    ctx.font = 'bold 12px Segoe UI';
+    ctx.font = 'bold 13px Segoe UI';
     ctx.textAlign = 'left';
-    ctx.fillText(`${anguloIncidencia}°`, centerX - ladoPrisma / 2 - 50, pontoEntradaY - 20);
+    ctx.fillText(`${anguloIncidencia}°`, pontoEntradaX - 70, pontoEntradaY - 15);
+
+    // Legenda das cores do arco-íris
+    const legendaY = 30;
+    ctx.font = 'bold 14px Segoe UI';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = isDark ? '#e8e8f0' : '#212529';
+    ctx.fillText(' Cores do Arco-íris (Espectro Visível)', canvas.width / 2, legendaY);
+
+    // Desenhar pequena barra de cores
+    const barraLargura = 280;
+    const barraX = (canvas.width - barraLargura) / 2;
+    const barraY = legendaY + 10;
+    const barraAltura = 12;
+    
+    coresArcoIris.forEach((cor, i) => {
+      const larguraCor = barraLargura / coresArcoIris.length;
+      ctx.fillStyle = cor.cor;
+      ctx.fillRect(barraX + i * larguraCor, barraY, larguraCor, barraAltura);
+    });
   }
 
-  // Atualizar simulador
   function atualizarSimulador() {
     valAngulo.textContent = anguloInput.value + '°';
     valIndice.textContent = indiceInput.value;
@@ -1138,7 +1047,7 @@
 
   desenharPrisma();
 
-  // Quiz
+  // ===== QUIZ =====
   const perguntas = [
     {
       pergunta: "Qual cor da luz visível tem o MAIOR comprimento de onda?",
@@ -1227,7 +1136,7 @@
     } else {
       btn.classList.add('errada');
       botoes[p.correta].classList.add('correta');
-      quizFeedback.textContent = `❌ Resposta correta: ${p.opcoes[p.correta]}. ${p.explicacao.replace('✅ ', '')}`;
+      quizFeedback.textContent = ` Resposta correta: ${p.opcoes[p.correta]}. ${p.explicacao.replace('✅ ', '')}`;
       quizFeedback.className = 'quiz-feedback ativo erro';
     }
 
@@ -1252,8 +1161,8 @@
 
     let msg = '';
     if (pontos === perguntas.length) msg = '🏆 Perfeito! Você domina a dispersão da luz!';
-    else if (pontos >= 4) msg = '🌟 Excelente! Você entende muito bem o fenômeno!';
-    else if (pontos >= 3) msg = ' Bom trabalho! Revise alguns conceitos para melhorar.';
+    else if (pontos >= 4) msg = ' Excelente! Você entende muito bem o fenômeno!';
+    else if (pontos >= 3) msg = '👍 Bom trabalho! Revise alguns conceitos para melhorar.';
     else if (pontos >= 2) msg = '📚 Razoável. Que tal reler a seção sobre refração?';
     else msg = '💪 Não desista! Releia o conteúdo e tente novamente.';
 
