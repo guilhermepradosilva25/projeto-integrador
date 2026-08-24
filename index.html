@@ -3,1020 +3,1273 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Projeto Integrador — Dispersão da luz por meio da refração: óptica, robótica e acessibilidade no estudo do espectro eletromagnético. Turma 2 P.">
-<title>Dispersão da Luz · Projeto Integrador — Equipe Espectro · Turma 2 P</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-
+<meta name="description" content="Projeto Integrador CEP: Dispersão da Luz por Refração - do arco-íris aos prismas ópticos">
+<title>Dispersão da Luz | Projeto Integrador CEP</title>
 <style>
-/* ============ IDENTIDADE / VARIÁVEIS ============ */
-:root{
-  --bg:#080a12; --bg2:#0d1020; --surface:#12162a; --surface2:#0b0e1c;
-  --line:rgba(255,255,255,.10); --line-strong:rgba(255,255,255,.22);
-  --text:#eef1fa; --muted:#a9b0c9;
-  --red:#ff6b6b; --orange:#ff9838; --yellow:#ffd94d; --green:#4ade80;
-  --cyan:#3ddcff; --blue:#6b8cff; --violet:#b06bff;
-  --spectrum:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green),var(--cyan),var(--blue),var(--violet));
-  --disp:'Unbounded',sans-serif; --body:'Instrument Sans',sans-serif; --mono:'JetBrains Mono',monospace;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
-body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:1rem;line-height:1.65;overflow-x:hidden}
-::selection{background:var(--violet);color:#fff}
-:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
-img{max-width:100%;display:block}
-a{color:inherit}
-button{font-family:inherit}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* grão de filme */
-body::before{content:"";position:fixed;inset:-60%;width:220%;height:220%;pointer-events:none;z-index:96;opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 9s steps(10) infinite}
-@keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-2%,2%)}40%{transform:translate(2%,-1%)}60%{transform:translate(-1%,-2%)}80%{transform:translate(1%,2%)}}
+  :root {
+    --roxo-profundo: #3a0ca3;
+    --roxo-medio: #7209b7;
+    --azul-violeta: #560bad;
+    --ciano: #48cae4;
+    --rosa: #f72585;
+    --amarelo: #ffbe0b;
+    --laranja: #fb5607;
+    --branco: #ffffff;
+    --cinza-claro: #f8f9fa;
+    --cinza-texto: #212529;
+    --cinza-card: #ffffff;
+    --fundo-body: #f8f9fa;
+    --sombra: 0 8px 24px rgba(58, 12, 163, 0.15);
+    --sombra-forte: 0 12px 32px rgba(58, 12, 163, 0.25);
+    --transicao: 0.3s ease;
+    --header-bg: linear-gradient(135deg, #3a0ca3, #7209b7);
+    --header-text: #ffffff;
+  }
 
-.skip{position:absolute;left:-999px;top:.6rem;z-index:200;background:var(--yellow);color:#111;padding:.7rem 1.2rem;border-radius:8px;font-weight:700}
-.skip:focus{left:.6rem}
+  body.modo-escuro {
+    --roxo-profundo: #b5179e;
+    --roxo-medio: #f72585;
+    --azul-violeta: #7209b7;
+    --ciano: #4cc9f0;
+    --branco: #1a1a2e;
+    --cinza-claro: #0f0f1e;
+    --cinza-texto: #e8e8f0;
+    --cinza-card: #1e1e32;
+    --fundo-body: #0f0f1e;
+    --sombra: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --sombra-forte: 0 12px 32px rgba(0, 0, 0, 0.7);
+    --header-bg: linear-gradient(135deg, #1a0a2e, #2d1b4e);
+    --header-text: #e8e8f0;
+  }
 
-.wrap{width:min(1180px,92%);margin-inline:auto}
-section{padding:clamp(4.5rem,9vw,7.5rem) 0;position:relative}
+  html { scroll-behavior: smooth; }
 
-/* ============ TIPOGRAFIA ============ */
-.disp{font-family:var(--disp)}
-.kick{font-family:var(--mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:#98a1c4;display:flex;align-items:center;gap:.7rem;margin-bottom:1.1rem}
-.kick::before{content:"";width:34px;height:3px;background:var(--spectrum);border-radius:2px}
-.h2{font-family:var(--disp);font-weight:700;font-size:clamp(1.65rem,3.6vw,2.7rem);line-height:1.12;letter-spacing:-.01em;margin-bottom:1.2rem}
-.lead{color:var(--muted);font-size:clamp(1rem,1.4vw,1.15rem);max-width:62ch}
-.mono{font-family:var(--mono)}
-b,strong{color:#fff}
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.7;
+    color: var(--cinza-texto);
+    background: var(--fundo-body);
+    font-size: 1.05rem;
+    transition: background var(--transicao), color var(--transicao);
+  }
 
-/* máscara de linha (títulos) */
-.lm{overflow:hidden}
-.lm>span{display:block;transform:translateY(115%);transition:transform .95s cubic-bezier(.2,.75,.15,1)}
-.lm.in>span{transform:none}
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 3px solid var(--amarelo);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 
-/* revelação */
-.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
-.rv.in{opacity:1;transform:none}
+  /* Animações */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
 
-/* ============ NAVEGAÇÃO ============ */
-.nav{position:sticky;top:0;z-index:90;background:rgba(8,10,18,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
-.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;font-family:var(--disp);font-weight:700;font-size:.85rem;letter-spacing:.08em}
-.brand svg{width:26px;height:26px}
-.nav-links{display:flex;gap:1.6rem;list-style:none}
-.nav-links a{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--muted);padding:.4rem 0;position:relative;transition:color .25s}
-.nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--spectrum);transition:width .3s}
-.nav-links a:hover,.nav-links a[aria-current="true"]{color:#fff}
-.nav-links a:hover::after,.nav-links a[aria-current="true"]::after{width:100%}
-#progress{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--spectrum)}
-.burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;width:42px;height:42px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px}
-.burger span{width:18px;height:2px;background:#fff;display:block;transition:.3s}
-.mnav{position:fixed;inset:0;z-index:120;background:rgba(6,8,15,.97);display:flex;flex-direction:column;justify-content:center;padding:2rem 8%;gap:.4rem;transform:translateY(-100%);transition:transform .5s cubic-bezier(.7,0,.2,1)}
-body.nav-open .mnav{transform:none}
-body.nav-open{overflow:hidden}
-.mnav a{font-family:var(--disp);font-size:clamp(1.4rem,6vw,2.2rem);font-weight:700;text-decoration:none;padding:.55rem 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
-.mnav a small{font-family:var(--mono);font-size:.7rem;color:var(--muted);align-self:center}
-.mnav a:hover{color:var(--yellow)}
-.mclose{position:absolute;top:1.1rem;right:1.3rem;background:none;border:1px solid var(--line);color:#fff;font-size:1.1rem;width:44px;height:44px;border-radius:10px;cursor:pointer}
+  .reveal.visivel { opacity: 1; transform: translateY(0); }
+  .reveal-esquerda { transform: translateX(-50px); }
+  .reveal-direita { transform: translateX(50px); }
+  .reveal-esquerda.visivel, .reveal-direita.visivel { transform: translateX(0); }
 
-/* ============ HERO ============ */
-.hero{min-height:100svh;display:flex;align-items:center;position:relative;overflow:hidden;
-  background:radial-gradient(1100px 640px at 72% 18%,#131838 0%,transparent 62%),radial-gradient(800px 500px at 15% 85%,#0f1226 0%,transparent 55%),var(--bg)}
-#prism{position:absolute;inset:0;width:100%;height:100%}
-.hero .wrap{position:relative;z-index:3;padding:7.5rem 0 5rem}
-.hero-title{font-family:var(--disp);font-weight:900;font-size:clamp(3rem,9.5vw,7.2rem);line-height:.98;letter-spacing:-.02em;margin:.6rem 0 1.4rem}
-.hero-title b{color:var(--c);text-shadow:0 0 30px color-mix(in srgb,var(--c) 50%,transparent);display:inline-block;transition:transform .3s}
-.hero-title b:hover{transform:translateY(-8px) rotate(-4deg)}
-.hero-sub{max-width:58ch;color:var(--muted);font-size:clamp(1rem,1.5vw,1.2rem)}
-.hero-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.8rem 0 2.2rem;list-style:none}
-.hero-tags li{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line-strong);padding:.42rem .8rem;border-radius:999px;color:#cfd5ea}
-.hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.5rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .25s,box-shadow .25s,border-color .25s}
-.btn-pr{background:var(--spectrum);color:#0a0c14;box-shadow:0 8px 30px rgba(120,120,255,.25)}
-.btn-pr:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(120,120,255,.4)}
-.btn-gh{border-color:var(--line-strong);color:var(--text);background:rgba(255,255,255,.03)}
-.btn-gh:hover{border-color:#fff;transform:translateY(-3px)}
-.hero-meta{display:flex;gap:2.4rem;flex-wrap:wrap;margin-top:3rem;border-top:1px solid var(--line);padding-top:1.4rem}
-.hero-meta div{font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.08em}
-.hero-meta strong{display:block;font-family:var(--disp);font-size:1.35rem;color:#fff;letter-spacing:0}
-.badge{position:absolute;right:4%;bottom:8%;width:130px;height:130px;z-index:3;animation:spin 20s linear infinite;opacity:.85}
-.badge text{font-family:var(--mono);font-size:9.5px;letter-spacing:.32em;fill:#cfd5ea}
-@keyframes spin{to{transform:rotate(360deg)}}
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--header-bg);
+    color: var(--header-text);
+    box-shadow: var(--sombra);
+    transition: background var(--transicao);
+  }
 
-/* ticker do espectro */
-.ticker{border-block:1px solid var(--line);overflow:hidden;background:var(--surface2)}
-.tk-track{display:flex;gap:3rem;width:max-content;padding:.85rem 0;animation:tk 30s linear infinite}
-.tk-track span{font-family:var(--mono);font-size:.75rem;letter-spacing:.2em;white-space:nowrap}
-@keyframes tk{to{transform:translateX(-50%)}}
-.c-r{color:var(--red)}.c-o{color:var(--orange)}.c-y{color:var(--yellow)}.c-g{color:var(--green)}.c-c{color:var(--cyan)}.c-b{color:var(--blue)}.c-v{color:var(--violet)}.c-w{color:#fff}
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 
-/* ============ SEÇÕES / COMPONENTES ============ */
-.grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
-.card{background:linear-gradient(180deg,#151a32,#0f1326);border:1px solid var(--line);border-radius:16px;padding:1.5rem}
-.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:2.5rem}
-.stat{background:var(--surface2);padding:1.4rem 1.3rem}
-.stat b{display:block;font-family:var(--disp);font-weight:700;font-size:clamp(1.6rem,3vw,2.3rem);color:#fff}
-.stat b em{font-style:normal;background:var(--spectrum);-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat small{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-.kb{overflow:hidden;border-radius:16px;border:1px solid var(--line)}
-.kb img{width:100%;height:100%;object-fit:cover;animation:kb 16s ease-in-out infinite alternate}
-@keyframes kb{from{transform:scale(1) translate(0,0)}to{transform:scale(1.09) translate(-1.5%,1.5%)}}
-.figcap{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.1em;margin-top:.7rem}
+  .logo-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--amarelo), var(--rosa));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    animation: brilhar 3s ease-in-out infinite;
+  }
 
-.formula{background:#0a0d1a;border:1px solid var(--line);border-left:3px solid var(--yellow);border-radius:0 12px 12px 0;padding:1.1rem 1.3rem;font-family:var(--mono);font-size:.95rem;margin:1rem 0}
-.formula small{display:block;color:var(--muted);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.35rem}
-.goal-list{list-style:none;margin-top:1.4rem;display:grid;gap:.8rem}
-.goal-list li{padding-left:1.6rem;position:relative;color:var(--muted)}
-.goal-list li::before{content:"◆";position:absolute;left:0;background:var(--spectrum);-webkit-background-clip:text;background-clip:text;color:transparent}
+  @keyframes brilhar {
+    0%, 100% { box-shadow: 0 0 10px var(--amarelo); }
+    50% { box-shadow: 0 0 25px var(--rosa), 0 0 40px var(--amarelo); }
+  }
 
-/* coluna dupla fixa */
-.sticky-col{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,4.5rem)}
-.sticky-left{position:sticky;top:96px}
-.pstep{border-top:1px solid var(--line);padding:1.7rem 0;display:grid;grid-template-columns:70px 1fr;gap:1.2rem}
-.pstep .num{font-family:var(--disp);font-weight:900;font-size:1.9rem;color:var(--c,var(--cyan))}
-.pstep h3{font-family:var(--disp);font-size:1.05rem;font-weight:700;margin-bottom:.45rem}
-.pstep p{color:var(--muted);font-size:.95rem}
-.pstep .tag{display:inline-block;margin-top:.7rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--line-strong);border-radius:999px;padding:.25rem .65rem;color:#cfd5ea}
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
 
-/* laboratório (simuladores) */
-.lab{border:1px solid var(--line);border-radius:18px;background:var(--surface2);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
-.lab-bar{display:flex;align-items:center;gap:.55rem;padding:.75rem 1.1rem;border-bottom:1px solid var(--line);background:#0d1122}
-.lab-bar i{width:10px;height:10px;border-radius:50%;display:block}
-.lab-bar .t{margin-left:.6rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.lab canvas{width:100%;display:block}
-.lab-ctrl{display:flex;flex-wrap:wrap;gap:1.2rem 2rem;align-items:center;padding:1.1rem 1.2rem;border-top:1px solid var(--line);background:#0c0f1e}
-.ctrl{display:flex;flex-direction:column;gap:.4rem}
-.ctrl label{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-input[type=range]{accent-color:var(--cyan);width:180px;cursor:pointer}
-.seg{display:flex;gap:.4rem;flex-wrap:wrap}
-.seg button{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;padding:.5rem .8rem;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:.25s}
-.seg button:hover{border-color:#fff;color:#fff}
-.seg button[aria-pressed="true"]{background:var(--cyan);border-color:var(--cyan);color:#04121a;font-weight:700}
-.readout{display:flex;gap:1.6rem;flex-wrap:wrap;padding:1rem 1.2rem;border-top:1px dashed var(--line);font-family:var(--mono);font-size:.78rem;color:var(--muted)}
-.readout b{color:var(--yellow);font-size:.95rem}
-.check{display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.72rem;color:var(--muted);cursor:pointer}
-.check input{accent-color:var(--violet);width:16px;height:16px}
+  nav a {
+    color: var(--header-text);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0.7rem;
+    border-radius: 6px;
+    transition: background var(--transicao);
+  }
 
-/* disco de Newton */
-.newton{display:grid;grid-template-columns:340px 1fr;gap:2.5rem;align-items:center}
-#percSwatch{width:54px;height:54px;border-radius:50%;border:2px solid var(--line-strong);flex:none}
+  nav a:hover, nav a:focus { background: rgba(255, 255, 255, 0.2); }
 
-/* fluxo SVG */
-.flux path.flow{stroke-dasharray:7 9;animation:dash 1.1s linear infinite}
-@keyframes dash{to{stroke-dashoffset:-16}}
-.flux text{font-family:var(--mono);fill:#dfe4f5}
-.flux .sub{fill:#98a1c4;font-size:10px}
+  .header-actions { display: flex; gap: 0.5rem; }
 
-/* painel robótica */
-.dash{border:1px solid var(--line);border-radius:18px;background:var(--surface2);padding:1.3rem;margin-top:2.2rem}
-.dash-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.1rem}
-.dash-head h3{font-family:var(--disp);font-size:1rem;font-weight:700}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
-.tile{border:1px solid var(--line);border-radius:12px;background:#0e1224;padding:1rem}
-.tile small{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.4rem}
-.tile .val{font-family:var(--mono);font-weight:700;font-size:clamp(1.2rem,2vw,1.7rem);color:#fff}
-.tile .val u{text-decoration:none;font-size:.75rem;color:var(--muted);margin-left:.2rem}
-.pump-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:.45rem;background:#555}
-.tile.on .pump-dot{background:var(--green);box-shadow:0 0 12px var(--green);animation:pulse 1.2s ease-in-out infinite}
-.tile.off .pump-dot{background:var(--red)}
-@keyframes pulse{50%{opacity:.35}}
-.dlog{margin-top:1rem;border-top:1px dashed var(--line);padding-top:.9rem;max-height:150px;overflow:auto}
-.dlog li{font-family:var(--mono);font-size:.74rem;color:var(--muted);padding:.2rem 0;list-style:none}
-.dlog li.ok{color:var(--green)}.dlog li.warn{color:var(--yellow)}
+  .icon-btn {
+    background: transparent;
+    border: 2px solid var(--header-text);
+    color: var(--header-text);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all var(--transicao);
+  }
 
-.code{background:#0a0d1a;border:1px solid var(--line);border-radius:14px;padding:1.4rem;font-family:var(--mono);font-size:.82rem;line-height:1.75;overflow-x:auto;white-space:pre;color:#d6dbef}
-.code .k{color:var(--violet)}.code .f{color:var(--cyan)}.code .s{color:var(--yellow)}.code .c{color:#5d6684}.code .n{color:var(--orange)}
+  .icon-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+  .menu-toggle { display: none; }
 
-/* galeria polaroids */
-.pc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.2rem;margin-top:2.5rem}
-.pcard{background:#f3efe4;padding:10px 10px 14px;border-radius:4px;box-shadow:0 24px 60px rgba(0,0,0,.5);transform:rotate(var(--r,0deg)) translateY(var(--y,0));transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s}
-.pcard:hover{transform:rotate(0deg) translateY(-8px) scale(1.03);box-shadow:0 34px 80px rgba(0,0,0,.65);z-index:5}
-.pcard img{aspect-ratio:4/3;object-fit:cover;filter:saturate(1.05)}
-.pcard figcaption{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;color:#333;padding:.7rem .3rem 0}
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #3a0ca3, #7209b7, #f72585);
+    background-size: 400% 400%;
+    color: var(--branco);
+    padding: 6rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: gradienteAnimado 15s ease infinite;
+  }
 
-/* calculadora */
-.calc{display:grid;grid-template-columns:1fr 1.2fr;gap:2.5rem;align-items:start}
-.field{margin-bottom:1.3rem}
-.field label{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
-.field input{width:100%;background:#0a0d1a;border:1px solid var(--line);border-radius:10px;color:#fff;font-family:var(--mono);font-size:1.1rem;padding:.8rem 1rem}
-.field input:focus{border-color:var(--cyan);outline:none}
-.out-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
-.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:3rem}
-.pillar{padding:1.6rem;border-left:1px solid var(--line);background:var(--surface2)}
-.pillar:first-child{border-left:none}
-.pillar i{font-family:var(--disp);font-weight:900;font-style:normal;font-size:1.6rem;display:block;margin-bottom:.7rem;color:var(--c,var(--green))}
-.pillar h3{font-family:var(--disp);font-size:.95rem;margin-bottom:.5rem}
-.pillar p{color:var(--muted);font-size:.9rem}
+  @keyframes gradienteAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-/* acessibilidade */
-.a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
-.a11y-list{list-style:none;display:grid;gap:.85rem;margin-top:1.2rem}
-.a11y-list li{padding-left:2rem;position:relative;color:var(--muted)}
-.a11y-list li::before{content:"✓";position:absolute;left:0;top:0;color:var(--green);font-weight:700}
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.3;
+  }
 
-/* equipe / footer */
-.credits{border-top:1px solid var(--line)}
-.credit-row{display:flex;justify-content:space-between;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--line);align-items:baseline;flex-wrap:wrap}
-.credit-row .role{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.credit-row .name{font-family:var(--disp);font-weight:500;font-size:1.05rem}
-footer{border-top:1px solid var(--line);background:var(--surface2);padding:3.5rem 0 6rem}
-.f-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:2.5rem}
-footer h4{font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
-footer ul{list-style:none}
-footer li{margin-bottom:.5rem}
-footer a{color:var(--muted);text-decoration:none;font-size:.9rem}
-footer a:hover{color:var(--yellow)}
-.f-note{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--line);font-family:var(--mono);font-size:.7rem;color:#78809e;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
 
-/* barra de acessibilidade */
-.atb-btn{position:fixed;left:1rem;bottom:1rem;z-index:110;width:54px;height:54px;border-radius:50%;background:#161b33;border:1px solid var(--line-strong);color:#fff;font-size:1.35rem;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.5);transition:transform .25s}
-.atb-btn:hover{transform:scale(1.08)}
-.atb{position:fixed;left:1rem;bottom:5.2rem;z-index:110;width:280px;background:#141830;border:1px solid var(--line-strong);border-radius:16px;padding:1.2rem;box-shadow:0 24px 60px rgba(0,0,0,.6)}
-.atb[hidden]{display:none}
-.atb h3{font-family:var(--disp);font-size:.9rem;margin-bottom:1rem}
-.atb-row{display:flex;gap:.5rem;margin-bottom:.7rem}
-.abtn{flex:1;background:#0c0f1e;border:1px solid var(--line);color:#fff;border-radius:9px;padding:.6rem;font-size:.85rem;cursor:pointer;transition:.25s}
-.abtn:hover{border-color:var(--cyan)}
-.abtn[aria-pressed="true"]{background:var(--yellow);color:#111;border-color:var(--yellow);font-weight:700}
-.atb small{display:block;color:var(--muted);font-size:.72rem;margin-top:.5rem}
+  .hero h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+    animation: fadeDown 1s ease;
+  }
 
-/* ============ ALTO CONTRASTE ============ */
-body.hc{--bg:#000;--bg2:#000;--surface:#000;--surface2:#000;--text:#fff;--muted:#eaeaea;--line:rgba(255,255,255,.45);--line-strong:#fff}
-body.hc body::before,body.hc::before{display:none}
-body.hc .card,body.hc .lab,body.hc .dash,body.hc .tile,body.hc .stat,body.hc .code,body.hc .formula{background:#000;border-color:#fff}
-body.hc .hero{background:#000}
-body.hc .pcard{background:#fff}
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-/* ============ MOVIMENTO REDUZIDO ============ */
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
-}
-body.rm *,body.rm *::before,body.rm *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
-body.rm html{scroll-behavior:auto}
+  .hero p {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeDown 1s ease 0.3s both;
+  }
 
-/* ============ RESPONSIVO ============ */
-@media (max-width:960px){
-  .nav-links{display:none}
-  .burger{display:flex}
-  .grid2,.sticky-col,.calc,.a11y-grid,.newton{grid-template-columns:1fr}
-  .sticky-left{position:static}
-  .tiles{grid-template-columns:1fr 1fr}
-  .stat-row{grid-template-columns:1fr 1fr}
-  .pc-grid{grid-template-columns:1fr 1fr}
-  .pillars{grid-template-columns:1fr}
-  .pillar{border-left:none;border-top:1px solid var(--line)}
-  .f-grid{grid-template-columns:1fr}
-  .badge{display:none}
-}
-@media (max-width:600px){
-  .pc-grid,.tiles{grid-template-columns:1fr}
-  .pstep{grid-template-columns:1fr;gap:.4rem}
-  .hero .wrap{padding-top:6rem}
-  input[type=range]{width:100%}
-  .atb{width:calc(100vw - 2rem)}
-}
+  .btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--amarelo), var(--laranja));
+    color: var(--branco);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform var(--transicao), box-shadow var(--transicao);
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    animation: fadeDown 1s ease 0.6s both;
+    box-shadow: 0 4px 15px rgba(251, 86, 7, 0.4);
+  }
+
+  .btn:hover, .btn:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(251, 86, 7, 0.6);
+  }
+
+  /* Seções */
+  section {
+    padding: 4rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  section h2 {
+    color: var(--roxo-profundo);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 1rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
+  }
+
+  body.modo-escuro section h2 { color: var(--ciano); }
+
+  section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 100px; height: 5px;
+    background: linear-gradient(90deg, var(--amarelo), var(--rosa), var(--ciano));
+    border-radius: 3px;
+  }
+
+  .section-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    color: var(--cinza-texto);
+    opacity: 0.9;
+    font-size: 1.15rem;
+  }
+
+  /* Cards */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .card {
+    background: var(--cinza-card);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: var(--sombra);
+    transition: all var(--transicao);
+    border-top: 5px solid var(--roxo-medio);
+    color: var(--cinza-texto);
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-forte);
+  }
+
+  .card-icon {
+    width: 70px; height: 70px;
+    background: linear-gradient(135deg, var(--roxo-medio), var(--rosa));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--branco);
+  }
+
+  .card h3 {
+    color: var(--roxo-profundo);
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+  }
+
+  body.modo-escuro .card h3 { color: var(--ciano); }
+
+  /* Simulador de Prisma */
+  .simulador-container {
+    background: var(--cinza-card);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: var(--sombra);
+    margin-top: 2rem;
+    color: var(--cinza-texto);
+  }
+
+  .simulador-canvas {
+    width: 100%;
+    max-width: 900px;
+    height: 450px;
+    margin: 0 auto;
+    display: block;
+    background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    border: 3px solid var(--roxo-medio);
+  }
+
+  body.modo-escuro .simulador-canvas {
+    background: linear-gradient(to bottom, #1e1e32 0%, #2d2d5a 100%);
+    border-color: var(--ciano);
+  }
+
+  .controles-simulador {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .controle-item label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--roxo-profundo);
+  }
+
+  body.modo-escuro .controle-item label { color: var(--ciano); }
+
+  .controle-item input[type="range"] {
+    width: 100%;
+    accent-color: var(--roxo-medio);
+  }
+
+  .valor-display {
+    display: inline-block;
+    background: var(--roxo-profundo);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+  }
+
+  /* Arco-íris Interativo */
+  .arcoiris-section {
+    background: linear-gradient(135deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background-size: 700% 700%;
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    margin: 3rem auto;
+    max-width: 1200px;
+    animation: arcoirisAnimado 8s ease infinite;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @keyframes arcoirisAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .arcoiris-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+  }
+
+  .arcoiris-content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+
+  .arcoiris-content h2 { color: white; }
+  .arcoiris-content h2::after { background: white; }
+
+  /* Quiz */
+  .quiz-container {
+    background: var(--cinza-card);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--sombra);
+    margin-top: 2rem;
+    color: var(--cinza-texto);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .quiz-progresso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: var(--roxo-profundo);
+  }
+
+  body.modo-escuro .quiz-progresso { color: var(--ciano); }
+
+  .quiz-barra {
+    flex: 1;
+    height: 10px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 5px;
+    margin: 0 1rem;
+    overflow: hidden;
+  }
+
+  .quiz-barra-preenchimento {
+    height: 100%;
+    background: linear-gradient(90deg, var(--roxo-medio), var(--rosa));
+    transition: width 0.4s ease;
+    border-radius: 5px;
+  }
+
+  .quiz-pergunta {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--roxo-profundo);
+    font-weight: 600;
+  }
+
+  body.modo-escuro .quiz-pergunta { color: var(--ciano); }
+
+  .quiz-opcoes { display: grid; gap: 0.8rem; margin-bottom: 1.5rem; }
+
+  .quiz-opcao {
+    background: var(--fundo-body);
+    border: 2px solid transparent;
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    transition: all var(--transicao);
+    color: var(--cinza-texto);
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .quiz-opcao:hover:not(:disabled) {
+    border-color: var(--roxo-medio);
+    transform: translateX(5px);
+  }
+
+  .quiz-opcao:disabled { cursor: not-allowed; }
+
+  .quiz-opcao.correta {
+    background: #2a9d8f;
+    color: white;
+    border-color: #2a9d8f;
+    animation: pulse-verde 0.5s ease;
+  }
+
+  .quiz-opcao.errada {
+    background: #e63946;
+    color: white;
+    border-color: #e63946;
+    animation: shake 0.4s ease;
+  }
+
+  @keyframes pulse-verde {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+
+  .quiz-letra {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    background: var(--roxo-profundo);
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  .quiz-feedback {
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    display: none;
+    animation: fadeDown 0.4s ease;
+  }
+
+  .quiz-feedback.ativo { display: block; }
+  .quiz-feedback.sucesso { background: rgba(42, 157, 143, 0.15); border-left: 4px solid #2a9d8f; color: #2a9d8f; }
+  .quiz-feedback.erro { background: rgba(230, 57, 70, 0.15); border-left: 4px solid #e63946; color: #e63946; }
+
+  .quiz-botoes { display: flex; gap: 1rem; justify-content: flex-end; flex-wrap: wrap; }
+
+  .quiz-btn {
+    background: var(--roxo-medio);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all var(--transicao);
+    font-family: inherit;
+  }
+
+  .quiz-btn:hover:not(:disabled) {
+    background: var(--roxo-profundo);
+    transform: translateY(-2px);
+  }
+
+  .quiz-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .quiz-resultado { text-align: center; padding: 2rem 1rem; }
+  .quiz-resultado h3 { font-size: 1.8rem; color: var(--roxo-profundo); margin-bottom: 1rem; }
+  .quiz-placar { font-size: 3rem; font-weight: bold; color: var(--amarelo); margin: 1rem 0; }
+  .quiz-msg { font-size: 1.1rem; margin-bottom: 1.5rem; }
+
+  /* Experimento Caseiro */
+  .experimento-box {
+    background: linear-gradient(135deg, var(--roxo-profundo), var(--roxo-medio));
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    margin-top: 2rem;
+    box-shadow: var(--sombra-forte);
+  }
+
+  .experimento-box h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .materiais-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .material-item {
+    background: rgba(255,255,255,0.15);
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+
+  .material-item .icone { font-size: 2rem; margin-bottom: 0.5rem; }
+
+  .passos {
+    background: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+  }
+
+  .passo {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+  }
+
+  .passo::before {
+    content: attr(data-numero);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--amarelo);
+    color: var(--roxo-profundo);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--roxo-profundo);
+    color: white;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  body.modo-escuro footer { background: #0a0a1a; }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    nav ul {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    nav ul.ativo { display: flex; }
+    nav a { display: block; padding: 0.8rem; text-align: center; }
+    section { padding: 3rem 1rem; }
+    .simulador-canvas { height: 350px; }
+    .quiz-container { padding: 1.5rem; }
+    .quiz-placar { font-size: 2.5rem; }
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px; left: 0;
+    background: var(--amarelo);
+    color: var(--roxo-profundo);
+    padding: 0.5rem 1rem;
+    z-index: 2000;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .skip-link:focus { top: 0; }
 </style>
 </head>
 <body>
 
-<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<a href="#conteudo" class="skip-link">Pular para o conteúdo principal</a>
 
-<!-- ================= NAVEGAÇÃO ================= -->
-<header class="nav">
-  <div class="wrap nav-in">
-    <a class="brand" href="#inicio" aria-label="Equipe Espectro — voltar ao início">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#ff6b6b"/><stop offset=".5" stop-color="#ffd94d"/><stop offset="1" stop-color="#6b8cff"/></linearGradient></defs><path d="M16 4 30 28 2 28 Z" fill="none" stroke="url(#lg)" stroke-width="2.4" stroke-linejoin="round"/></svg>
-      EQUIPE&nbsp;ESPECTRO
-    </a>
+<header>
+  <div class="nav-container">
+    <div class="logo">
+      <div class="logo-icon" aria-hidden="true">🌈</div>
+      <span>Dispersão da Luz</span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Ativar modo escuro" title="Alternar tema"></button>
+      <button class="icon-btn menu-toggle" aria-label="Abrir menu" aria-expanded="false" id="menuBtn">☰</button>
+    </div>
     <nav aria-label="Navegação principal">
-      <ul class="nav-links">
-        <li><a href="#desafio">Desafio</a></li>
-        <li><a href="#optica">Óptica</a></li>
-        <li><a href="#sistema">Robótica</a></li>
-        <li><a href="#prototipo">Protótipo</a></li>
-        <li><a href="#impacto">Impacto</a></li>
-        <li><a href="#acessibilidade">Acessibilidade</a></li>
-        <li><a href="#equipe">Equipe</a></li>
+      <ul id="menuNav">
+        <li><a href="#conceito">Conceito</a></li>
+        <li><a href="#refracao">Refração</a></li>
+        <li><a href="#simulador">Simulador</a></li>
+        <li><a href="#arcoiris">Arco-íris</a></li>
+        <li><a href="#aplicacoes">Aplicações</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+        <li><a href="#experimento">Experimento</a></li>
       </ul>
     </nav>
-    <button class="burger" id="menuBtn" aria-expanded="false" aria-controls="mnav" aria-label="Abrir menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div id="progress" aria-hidden="true"></div>
   </div>
 </header>
 
-<nav class="mnav" id="mnav" aria-label="Menu móvel">
-  <button class="mclose" id="mclose" aria-label="Fechar menu">✕</button>
-  <a href="#desafio">O Desafio <small>01</small></a>
-  <a href="#optica">Óptica &amp; Dispersão <small>02</small></a>
-  <a href="#sistema">Robótica <small>03</small></a>
-  <a href="#prototipo">Protótipo <small>04</small></a>
-  <a href="#impacto">Impacto <small>05</small></a>
-  <a href="#acessibilidade">Acessibilidade <small>06</small></a>
-  <a href="#equipe">Equipe <small>07</small></a>
-</nav>
-
 <main id="conteudo">
-
-<!-- ================= HERO / PRISMA ================= -->
-<section class="hero" id="inicio" aria-label="Abertura — dispersão da luz">
-  <canvas id="prism" aria-hidden="true"></canvas>
-  <div class="wrap">
-    <p class="kick" data-scramble>Projeto Integrador · Turma 2 P · 2026</p>
-    <h1 class="hero-title" aria-label="Dispersão da luz por meio da refração">
-      <span aria-hidden="true"><b style="--c:var(--red)">D</b><b style="--c:var(--orange)">I</b><b style="--c:var(--yellow)">S</b><b style="--c:var(--green)">P</b><b style="--c:var(--cyan)">E</b><b style="--c:var(--blue)">R</b><b style="--c:var(--violet)">S</b><b style="--c:var(--red)">Ã</b><b style="--c:var(--orange)">O</b></span>
-    </h1>
-    <p class="hero-sub rv" style="--d:.15s">A luz branca guarda todas as cores. Quando ela atravessa um prisma — ou qualquer meio transparente — a <strong>refração</strong> separa cada comprimento de onda. Nosso projeto integra óptica, robótica e acessibilidade para demonstrar esse fenômeno fundamental da física.</p>
-    <ul class="hero-tags rv" style="--d:.3s">
-      <li>Óptica aplicada</li><li>Refração · Snell</li><li>Robótica &amp; sensores</li><li>Acessibilidade WCAG</li><li>Educação científica</li>
-    </ul>
-    <div class="hero-cta rv" style="--d:.45s">
-      <a class="btn btn-pr" href="#optica">Explorar a bancada óptica ▸</a>
-      <a class="btn btn-gh" href="#sistema">Conhecer o sistema</a>
-    </div>
-    <div class="hero-meta rv" style="--d:.6s">
-      <div><strong>7</strong>cores do espectro</div>
-      <div><strong>380–750</strong>nm visíveis</div>
-      <div><strong>4</strong>simulações interativas</div>
-      <div><strong>100%</strong>acessível</div>
-    </div>
+<section class="hero" aria-labelledby="titulo-hero">
+  <div class="hero-content">
+    <h1 id="titulo-hero"> Dispersão da Luz por Refração</h1>
+    <p>Descubra como a luz branca se decompõe em cores ao atravessar diferentes meios, criando fenômenos fascinantes como o arco-íris e permitindo tecnologias revolucionárias.</p>
+    <a href="#conceito" class="btn">Explorar o Fenômeno</a>
   </div>
-  <svg class="badge" viewBox="0 0 130 130" aria-hidden="true">
-    <defs><path id="circ" d="M65,65 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/></defs>
-    <text><textPath href="#circ">PROJETO INTEGRADOR • ÓPTICA • TURMA 2 P • 2026 •&#160;</textPath></text>
-    <path d="M65 48 80 78 50 78 Z" fill="none" stroke="url(#lg)" stroke-width="2"/>
-  </svg>
 </section>
 
-<!-- ticker do espectro -->
-<div class="ticker" aria-hidden="true">
-  <div class="tk-track">
-    <span class="c-r">VERMELHO · 650 nm</span><span class="c-o">LARANJA · 610 nm</span><span class="c-y">AMARELO · 580 nm</span><span class="c-g">VERDE · 530 nm</span><span class="c-c">CIANO · 490 nm</span><span class="c-b">AZUL · 450 nm</span><span class="c-v">VIOLETA · 410 nm</span><span class="c-w">n(λ) = A + B/λ²</span><span class="c-w">n₁·sen θ₁ = n₂·sen θ₂</span><span class="c-w">v = c / n</span>
-    <span class="c-r">VERMELHO · 650 nm</span><span class="c-o">LARANJA · 610 nm</span><span class="c-y">AMARELO · 580 nm</span><span class="c-g">VERDE · 530 nm</span><span class="c-c">CIANO · 490 nm</span><span class="c-b">AZUL · 450 nm</span><span class="c-v">VIOLETA · 410 nm</span><span class="c-w">n(λ) = A + B/λ²</span><span class="c-w">n₁·sen θ₁ = n₂·sen θ₂</span><span class="c-w">v = c / n</span>
-  </div>
-</div>
+<section id="conceito" aria-labelledby="titulo-conceito">
+  <h2 id="titulo-conceito" class="reveal"> O que é Dispersão da Luz?</h2>
+  <p class="section-intro reveal">A dispersão da luz é o fenômeno óptico no qual a luz branca (policromática) se decompõe em suas diferentes cores ao atravessar um meio transparente, devido à variação do índice de refração com o comprimento de onda.</p>
 
-<!-- ================= 01 DESAFIO ================= -->
-<section id="desafio">
-  <div class="wrap">
-    <p class="kick">01 / O desafio</p>
-    <div class="grid2">
-      <div>
-        <h2 class="h2 lm"><span>Desvendando o arco-íris escondido na luz</span></h2>
-        <p class="lead rv">Como demonstrar que a luz branca é composta por todas as cores do espectro visível? O desafio do nosso Projeto Integrador é criar um sistema interativo que permita <strong>visualizar e compreender a dispersão da luz</strong> através de experimentos práticos e simulações digitais.</p>
-        <p class="lead rv" style="--d:.15s; margin-top:1rem">A resposta estava nas aulas de óptica: ao combinar conceitos de <strong>refração, dispersão e síntese aditiva</strong> com tecnologia e robótica, podemos construir ferramentas educacionais que tornam o abstrato em concreto e o invisível em visível.</p>
-        <ul class="goal-list rv" style="--d:.3s">
-          <li>Demonstrar a <strong>dispersão cromática</strong> com prismas e simuladores.</li>
-          <li>Integrar <strong>sensores e robótica</strong> para medições em tempo real.</li>
-          <li>Garantir <strong>acessibilidade total</strong> no ensino de ciências.</li>
-        </ul>
-      </div>
-      <figure class="rv" style="--d:.2s">
-        <div class="kb"><img src="https://picsum.photos/seed/optica-laboratorio/900/640" alt="Laboratório de óptica com prisma e feixes de luz coloridos" loading="lazy"></div>
-        <figcaption class="figcap">FIG. 01 — Bancada experimental de óptica.</figcaption>
-      </figure>
+  <div class="cards-grid">
+    <article class="card reveal">
+      <div class="card-icon" aria-hidden="true">🔬</div>
+      <h3>Luz Branca</h3>
+      <p>A luz do Sol ou de uma lâmpada comum parece branca, mas na verdade é composta por <strong>todas as cores do espectro visível</strong> (vermelho, laranja, amarelo, verde, azul, anil e violeta).</p>
+    </article>
+    <article class="card reveal">
+      <div class="card-icon" aria-hidden="true"></div>
+      <h3>Índice de Refração</h3>
+      <p>Cada cor tem um <strong>comprimento de onda diferente</strong>. O violeta (menor comprimento) refrata mais que o vermelho (maior comprimento), causando a separação das cores.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card-icon" aria-hidden="true">🎨</div>
+      <h3>Espectro Visível</h3>
+      <p>As cores separadas formam um <strong>espectro contínuo</strong>, indo do vermelho (700 nm) ao violeta (400 nm), passando por todas as cores intermediárias.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card-icon" aria-hidden="true"></div>
+      <h3>Descoberta Histórica</h3>
+      <p><strong>Isaac Newton</strong> (1666) foi o primeiro a demonstrar experimentalmente a dispersão da luz usando um prisma de vidro, revolucionando o estudo da óptica.</p>
+    </article>
+  </div>
+</section>
+
+<section id="refracao" aria-labelledby="titulo-refracao">
+  <h2 id="titulo-refracao" class="reveal">📐 Refração: A Base da Dispersão</h2>
+  <p class="section-intro reveal">A refração é a mudança de direção e velocidade da luz ao passar de um meio para outro. Quando combinada com a dependência do comprimento de onda, temos a dispersão.</p>
+
+  <div class="optica-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 2rem;">
+    <div class="reveal reveal-esquerda">
+      <h3 style="color: var(--roxo-profundo); margin-bottom: 1rem;">Lei de Snell-Descartes</h3>
+      <p>A refração obedece à lei: <strong style="color: var(--roxo-medio); font-size: 1.2rem;">n₁·sen(θ₁) = n₂·sen(θ₂)</strong></p>
+      <p>Onde <strong>n</strong> é o índice de refração do meio e <strong>θ</strong> é o ângulo em relação à normal.</p>
+      <p>📌 <strong>Dispersão Cromática:</strong> O índice de refração <strong>n</strong> varia com o comprimento de onda λ. Isso significa que cada cor refrata com um ângulo ligeiramente diferente!</p>
+      <p>📌 <strong>Exemplo no vidro:</strong><br>
+      • Violeta (400 nm): n ≈ 1.53<br>
+      • Vermelho (700 nm): n ≈ 1.51<br>
+      Essa pequena diferença causa a separação das cores!</p>
     </div>
-    <div class="stat-row">
-      <div class="stat rv"><b data-count="7" data-suffix=" cores">0</b><small>do espectro visível</small></div>
-      <div class="stat rv" style="--d:.1s"><b data-count="380" data-suffix=" nm">0</b><small>comprimento mínimo</small></div>
-      <div class="stat rv" style="--d:.2s"><b data-count="750" data-suffix=" nm">0</b><small>comprimento máximo</small></div>
-      <div class="stat rv" style="--d:.3s"><b data-count="4" data-suffix=" experimentos">0</b><small>simulações interativas</small></div>
+    <div class="reveal reveal-direita" style="background: var(--cinza-card); padding: 2rem; border-radius: 16px; box-shadow: var(--sombra);">
+      <h3 style="color: var(--roxo-profundo); margin-bottom: 1rem; text-align: center;">Por que as cores se separam?</h3>
+      <ol style="line-height: 2; padding-left: 1.5rem;">
+        <li>Luz branca entra no prisma</li>
+        <li>Cada cor tem velocidade diferente no vidro</li>
+        <li>Violeta é mais lenta → refrata mais</li>
+        <li>Vermelho é mais rápido → refrata menos</li>
+        <li>Na saída, as cores já estão separadas</li>
+        <li>Resultado: espectro colorido!</li>
+      </ol>
     </div>
   </div>
 </section>
 
-<!-- ================= 02 ÓPTICA ================= -->
-<section id="optica" style="background:var(--bg2)">
-  <div class="wrap">
-    <p class="kick">02 / Tecnociência · Óptica aplicada</p>
-    <h2 class="h2 lm"><span>Dispersão: o arco-íris escondido na luz branca</span></h2>
-    <div class="grid2">
-      <div>
-        <p class="lead rv">Em 1666, Isaac Newton mostrou que a luz branca não é pura: ela é uma <strong>soma de todas as cores</strong>. Ao atravessar um prisma de vidro, cada cor é desviada por um ângulo diferente — e o leque de cores que aparece é o <strong>espectro visível</strong>.</p>
-        <p class="lead rv" style="--d:.12s; margin-top:1rem">Por quê? A refração acontece porque a luz <strong>muda de velocidade</strong> ao trocar de meio: <span class="mono">v = c / n</span>. O detalhe crucial é que o índice de refração <strong>não é igual para todas as cores</strong> — ele depende do comprimento de onda λ (equação de Cauchy). O violeta (λ curta) "freia" mais e se curva mais; o vermelho (λ longa) quase segue reto. Essa diferença é a <strong>dispersão</strong>.</p>
-        <div class="formula rv" style="--d:.2s"><small>Lei de Snell — refração</small>n₁ · sen θ₁ = n₂ · sen θ₂</div>
-        <div class="formula rv" style="--d:.28s"><small>Equação de Cauchy — dispersão</small>n(λ) ≈ A + B / λ² &nbsp;→&nbsp; n<sub>violeta</sub> &gt; n<sub>vermelho</sub></div>
-      </div>
-      <figure class="rv" style="--d:.2s">
-        <div class="kb"><img src="https://picsum.photos/seed/laboratorio-optica-prisma/900/680" alt="Feixe de luz branca atravessando um prisma e se separando em cores" loading="lazy"></div>
-        <figcaption class="figcap">FIG. 02 — Bancada de óptica: o prisma revela o espectro.</figcaption>
-      </figure>
-    </div>
+<section id="simulador" aria-labelledby="titulo-simulador">
+  <h2 id="titulo-simulador" class="reveal">🎮 Simulador de Prisma Interativo</h2>
+  <p class="section-intro reveal">Ajuste os parâmetros e veja como a luz branca se dispersa ao atravessar um prisma de vidro!</p>
 
-    <!-- BANCADA VIRTUAL -->
-    <div class="lab rv" style="margin-top:3.5rem">
-      <div class="lab-bar"><i style="background:var(--red)"></i><i style="background:var(--yellow)"></i><i style="background:var(--green)"></i><span class="t">Bancada óptica virtual — refração &amp; dispersão (Lei de Snell ao vivo)</span></div>
-      <canvas id="refrCanvas" height="430" role="img" aria-label="Simulador de refração: um feixe de luz branca entra no meio selecionado e se dispersa em vermelho e violeta com ângulos diferentes"></canvas>
-      <div class="lab-ctrl">
-        <div class="ctrl">
-          <label for="incAngle">Ângulo de incidência θ₁ — <output id="incVal">45°</output></label>
-          <input type="range" id="incAngle" min="10" max="80" value="45" aria-label="Ângulo de incidência em graus">
-        </div>
-        <div class="ctrl">
-          <label id="medLbl">Meio refrator</label>
-          <div class="seg" role="group" aria-labelledby="medLbl">
-            <button data-n="1.52" data-name="Vidro crown" aria-pressed="true">Vidro · 1,52</button>
-            <button data-n="1.333" data-name="Água" aria-pressed="false">Água · 1,33</button>
-            <button data-n="1.49" data-name="Acrílico" aria-pressed="false">Acrílico · 1,49</button>
-            <button data-n="2.417" data-name="Diamante" aria-pressed="false">Diamante · 2,42</button>
-          </div>
-        </div>
-        <label class="check"><input type="checkbox" id="ampDisp" checked> Amplificar dispersão na tela ×40 (na realidade ela é sutil)</label>
+  <div class="simulador-container reveal reveal-escala">
+    <canvas id="prismaCanvas" class="simulador-canvas" width="900" height="450" role="img" aria-label="Simulação interativa de dispersão da luz em um prisma"></canvas>
+    
+    <div class="controles-simulador">
+      <div class="controle-item">
+        <label for="anguloIncidencia">
+          Ângulo de Incidência: <span class="valor-display" id="valAngulo">45°</span>
+        </label>
+        <input type="range" id="anguloIncidencia" min="0" max="80" value="45">
       </div>
-      <div class="readout" aria-live="polite">
-        <span>θ₂ (vermelho) <b id="rRed">—</b></span>
-        <span>θ₂ (violeta) <b id="rVio">—</b></span>
-        <span>Δθ real <b id="rDelta">—</b></span>
-        <span>n(650 nm) <b id="rNr">—</b></span>
-        <span>n(410 nm) <b id="rNv">—</b></span>
+      <div class="controle-item">
+        <label for="indiceRefacao">
+          Índice de Refração (n): <span class="valor-display" id="valIndice">1.52</span>
+        </label>
+        <input type="range" id="indiceRefacao" min="1.4" max="1.7" step="0.01" value="1.52">
       </div>
-    </div>
-
-    <!-- DISCO DE NEWTON -->
-    <div class="newton" style="margin-top:4rem">
-      <div class="rv">
-        <div class="lab">
-          <div class="lab-bar"><i style="background:var(--cyan)"></i><i style="background:var(--blue)"></i><i style="background:var(--violet)"></i><span class="t">Disco de Newton interativo</span></div>
-          <div style="display:flex;justify-content:center;padding:1.6rem"><canvas id="diskC" width="300" height="300" role="img" aria-label="Disco de Newton girando com sete cores do espectro"></canvas></div>
-          <div class="lab-ctrl">
-            <div class="ctrl" style="flex:1;min-width:200px">
-              <label for="rpm">Rotação — <output id="rpmVal">120 rpm</output></label>
-              <input type="range" id="rpm" min="0" max="600" step="10" value="120" aria-label="Rotações por minuto do disco">
-            </div>
-            <div class="seg">
-              <button data-rpm="0" aria-pressed="false">Parado</button>
-              <button data-rpm="60" aria-pressed="false">Lento</button>
-              <button data-rpm="120" aria-pressed="true">Rápido</button>
-              <button data-rpm="600" aria-pressed="false">Máximo</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="rv" style="--d:.15s">
-        <h3 class="disp" style="font-size:1.35rem;font-weight:700;margin-bottom:1rem">O caminho inverso: do espectro de volta ao branco</h3>
-        <p class="lead">Se o prisma <em>separa</em>, o disco de Newton <em>reúne</em>. Girando as sete cores com velocidade suficiente, a persistência da visão soma os estímulos e enxergamos… <strong>branco</strong>. É a síntese aditiva acontecendo diante dos olhos.</p>
-        <div style="display:flex;gap:1rem;align-items:center;margin-top:1.4rem">
-          <div id="percSwatch" role="img" aria-label="Amostra da cor percebida pelo olho humano"></div>
-          <p class="mono" id="percTxt" style="font-size:.8rem;color:var(--muted)" aria-live="polite">A olho nu: branco por síntese aditiva.</p>
-        </div>
-        <p class="lead" style="margin-top:1.4rem">E a <strong>câmara escura</strong> completa o raciocínio: só enxergamos um objeto porque a luz que ele <em>reflete</em> chega aos nossos olhos. Uma superfície preta quase não reflete nada — ela <strong>absorve</strong> todos os comprimentos de onda.</p>
+      <div class="controle-item">
+        <label for="larguraFeixe">
+          Largura do Feixe: <span class="valor-display" id="valLargura">8</span>
+        </label>
+        <input type="range" id="larguraFeixe" min="2" max="15" value="8">
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= DO ESPECTRO AO CALOR ================= -->
-<section>
-  <div class="wrap sticky-col">
-    <div class="sticky-left">
-      <p class="kick">02·b / Aplicações da óptica</p>
-      <h2 class="h2 lm"><span>Como a dispersão se manifesta no mundo real</span></h2>
-      <p class="lead rv">Cada conceito de óptica estudado se transforma em fenômenos observáveis e aplicações práticas. Quatro exemplos fundamentais:</p>
-      <figure class="rv" style="--d:.15s;margin-top:1.6rem">
-        <div class="kb"><img src="https://picsum.photos/seed/lentes-optica/760/520" alt="Lentes ópticas e instrumentos de medição" loading="lazy"></div>
-        <figcaption class="figcap">FIG. 03 — Aplicações práticas da óptica.</figcaption>
-      </figure>
-    </div>
-    <div>
-      <div class="pstep rv" style="--c:var(--red)">
-        <div class="num">01</div>
-        <div><h3>Absorção e reflexão seletiva</h3>
-        <p>A câmara escura demonstra que superfícies negras capturam a luz, enquanto brancas a refletem. Cada fóton absorvido agita as moléculas do material — <strong>luz vira calor</strong>. Esse princípio explica por que roupas escuras esquentam mais ao sol.</p>
-        <span class="tag">Absorção · cores · energia</span></div>
-      </div>
-      <div class="pstep rv" style="--c:var(--yellow)">
-        <div class="num">02</div>
-        <div><h3>Lentes e instrumentos ópticos</h3>
-        <p>Óculos, telescópios e microscópios usam a refração controlada para focalizar a luz. Cada lente é projetada considerando o índice de refração e a curvatura necessária para convergir ou divergir os raios luminosos.</p>
-        <span class="tag">Refração · focalização · lentes</span></div>
-      </div>
-      <div class="pstep rv" style="--c:var(--green)">
-        <div class="num">03</div>
-        <div><h3>Arco-íris atmosférico</h3>
-        <p>Quando a luz solar atravessa gotas de água suspensas na atmosfera, cada gota age como um pequeno prisma. A dispersão combinada de milhões de gotas cria o arco-íris — um fenômeno natural de óptica geométrica.</p>
-        <span class="tag">Dispersão · atmosfera · fenômenos</span></div>
-      </div>
-      <div class="pstep rv" style="--c:var(--violet)">
-        <div class="num">04</div>
-        <div><h3>Fibras ópticas e telecomunicações</h3>
-        <p>A reflexão interna total permite que a luz viaje quilômetros dentro de fibras de vidro sem escapar. A dispersão cromática, porém, é um desafio: diferentes cores chegam em tempos ligeiramente diferentes, limitando a velocidade de transmissão.</p>
-        <span class="tag">Reflexão total · telecomunicações</span></div>
-      </div>
+<section id="arcoiris" class="arcoiris-section" aria-labelledby="titulo-arcoiris">
+  <div class="arcoiris-content reveal">
+    <h2 id="titulo-arcoiris">🌈 O Arco-íris: Dispersão na Natureza</h2>
+    <p style="max-width: 800px; margin: 1rem auto; font-size: 1.15rem; text-align: center;">
+      O arco-íris é o exemplo mais belo de dispersão da luz na natureza. Gotículas de água na atmosfera funcionam como <strong>minúsculos prismas</strong>, refratando e refletindo a luz solar.
+    </p>
+    
+    <div class="cards-grid" style="max-width: 1000px; margin: 2rem auto;">
+      <article class="card" style="background: rgba(255,255,255,0.95); color: #212529;">
+        <div class="card-icon" aria-hidden="true">💧</div>
+        <h3>Formação</h3>
+        <p>1. Luz solar entra na gota de água<br>
+           2. Refração na entrada (dispersão)<br>
+           3. Reflexão interna na gota<br>
+           4. Refração na saída (mais dispersão)</p>
+      </article>
+      <article class="card" style="background: rgba(255,255,255,0.95); color: #212529;">
+        <div class="card-icon" aria-hidden="true">🎯</div>
+        <h3>Ângulo de 42°</h3>
+        <p>O arco-íris primário aparece sempre a <strong>42°</strong> do ponto anti-solar (oposto ao Sol). O vermelho fica na parte externa e o violeta na interna.</p>
+      </article>
+      <article class="card" style="background: rgba(255,255,255,0.95); color: #212529;">
+        <div class="card-icon" aria-hidden="true">🌟</div>
+        <h3>Arco-íris Duplo</h3>
+        <p>O segundo arco-íris (mais fraco) surge de <strong>duas reflexões internas</strong> na gota, aparecendo a 51° com cores invertidas!</p>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- ================= 03 ROBÓTICA ================= -->
-<section id="sistema" style="background:var(--bg2)">
-  <div class="wrap">
-    <p class="kick">03 / Robótica &amp; programação</p>
-    <h2 class="h2 lm"><span>Medindo a luz com sensores e microcontroladores</span></h2>
-    <p class="lead rv">A óptica teórica ganha vida quando combinada com tecnologia. Nosso sistema usa sensores para medir intensidade luminosa, controlar ângulos e registrar dados em tempo real. Abaixo, o fluxograma completo do sistema de aquisição de dados.</p>
+<section id="aplicacoes" aria-labelledby="titulo-aplicacoes">
+  <h2 id="titulo-aplicacoes" class="reveal">🔬 Aplicações Tecnológicas</h2>
+  <p class="section-intro reveal">A dispersão da luz não é apenas um fenômeno bonito — ela permite tecnologias essenciais para ciência e comunicação.</p>
 
-    <svg class="flux rv" viewBox="0 0 920 340" role="img" aria-label="Fluxograma: sensores de luz e temperatura enviam dados ao microcontrolador ESP32, que processa as medições e ajusta o sistema" style="margin-top:2.5rem;width:100%">
-      <defs>
-        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#3ddcff"/></marker>
-        <marker id="arrv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#b06bff"/></marker>
-      </defs>
-      <!-- SENSORES -->
-      <rect x="20" y="40" width="200" height="200" rx="12" fill="#0e1224" stroke="#3ddcff" stroke-width="1.4"/>
-      <text x="40" y="70" font-size="13" fill="#3ddcff" letter-spacing="2">SENSORES</text>
-      <text x="40" y="102" font-size="12">LDR / Piranômetro</text><text x="40" y="120" class="sub">irradiância (W/m²)</text>
-      <text x="40" y="152" font-size="12">Sensor RGB</text><text x="40" y="170" class="sub">composição espectral</text>
-      <text x="40" y="202" font-size="12">Encoder angular</text><text x="40" y="220" class="sub">posição do prisma</text>
-      <!-- seta -->
-      <path class="flow" d="M220 140 H 300" stroke="#3ddcff" stroke-width="2" fill="none" marker-end="url(#arr)"/>
-      <!-- CONTROLADOR -->
-      <rect x="305" y="95" width="210" height="95" rx="12" fill="#0e1224" stroke="#ffd94d" stroke-width="1.4"/>
-      <text x="325" y="128" font-size="13" fill="#ffd94d" letter-spacing="2">CONTROLADOR</text>
-      <text x="325" y="152" font-size="12">ESP32 · aquisição</text>
-      <text x="325" y="170" font-size="12">de dados + telemetria</text>
-      <path class="flow" d="M515 142 H 585" stroke="#3ddcff" stroke-width="2" fill="none" marker-end="url(#arr)"/>
-      <!-- DECISÃO -->
-      <path d="M660 88 738 142 660 196 582 142 Z" fill="#0e1224" stroke="#b06bff" stroke-width="1.4"/>
-      <text x="612" y="138" font-size="12">Intensidade</text>
-      <text x="636" y="156" font-size="12">&gt; limiar ?</text>
-      <!-- SIM -->
-      <path class="flow" d="M738 142 H 782" stroke="#4ade80" stroke-width="2" fill="none" marker-end="url(#arr)"/>
-      <text x="748" y="132" font-size="11" fill="#4ade80">SIM</text>
-      <rect x="786" y="70" width="120" height="60" rx="10" fill="#0e1224" stroke="#4ade80" stroke-width="1.4"/>
-      <text x="802" y="96" font-size="12" fill="#4ade80">REGISTRAR</text><text x="802" y="114" class="sub">dados espectrais</text>
-      <rect x="786" y="150" width="120" height="60" rx="10" fill="#0e1224" stroke="#4ade80" stroke-width="1.4"/>
-      <text x="800" y="176" font-size="12" fill="#4ade80">SERVO ajuste</text><text x="800" y="194" class="sub">ângulo θ ideal</text>
-      <path class="flow" d="M846 130 V 150" stroke="#4ade80" stroke-width="2" fill="none" marker-end="url(#arr)"/>
-      <!-- NÃO -->
-      <path class="flow" d="M660 196 V 262 H 700" stroke="#b06bff" stroke-width="2" fill="none" marker-end="url(#arrv)"/>
-      <text x="668" y="222" font-size="11" fill="#b06bff">NÃO</text>
-      <rect x="700" y="235" width="150" height="56" rx="10" fill="#0e1224" stroke="#b06bff" stroke-width="1.4"/>
-      <text x="718" y="258" font-size="12" fill="#b06bff">STANDBY</text><text x="718" y="276" class="sub">economia de energia</text>
-    </svg>
+  <div class="cards-grid">
+    <article class="card reveal">
+      <div class="card-icon" aria-hidden="true">🔭</div>
+      <h3>Espectroscopia</h3>
+      <p>Instrumentos que analisam a luz dispersa para identificar <strong>elementos químicos</strong> em estrelas, laboratórios e até na atmosfera de planetas distantes.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card-icon" aria-hidden="true">📡</div>
+      <h3>Fibras Ópticas</h3>
+      <p>A dispersão cromática é um <strong>desafio</strong> nas telecomunicações, limitando a velocidade de transmissão. Engenheiros desenvolvem fibras especiais para minimizá-la.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card-icon" aria-hidden="true">📷</div>
+      <h3>Lentes e Câmeras</h3>
+      <p>A <strong>aberração cromática</strong> (dispersão indesejada em lentes) é corrigida com lentes compostas (acromáticas) em câmeras e telescópios profissionais.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card-icon" aria-hidden="true"></div>
+      <h3>Efeitos Especiais</h3>
+      <p>Prismas e redes de difração criam <strong>efeitos visuais</strong> em shows, cinemas e instalações artísticas, explorando a beleza da dispersão da luz.</p>
+    </article>
+  </div>
+</section>
 
-    <!-- PAINEL AO VIVO -->
-    <div class="dash rv" aria-live="polite">
-      <div class="dash-head">
-        <h3>📊 Telemetria simulada — acompanhamento em tempo real</h3>
-        <div class="seg">
-          <button id="modeAuto" aria-pressed="true">Modo AUTO</button>
-          <button id="modeMan" aria-pressed="false">Modo MANUAL</button>
-          <button id="pumpBtn" hidden>Registro: ativar</button>
-        </div>
+<section id="quiz" aria-labelledby="titulo-quiz">
+  <h2 id="titulo-quiz" class="reveal">🧠 Quiz: Teste seu Conhecimento</h2>
+  <p class="section-intro reveal">Você entendeu como funciona a dispersão da luz? Responda às 5 perguntas e descubra!</p>
+
+  <div class="quiz-container reveal reveal-escala" id="quizContainer" aria-live="polite">
+    <div class="quiz-progresso">
+      <span id="quizContador">Pergunta 1 de 5</span>
+      <div class="quiz-barra" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="1">
+        <div class="quiz-barra-preenchimento" id="quizBarra" style="width: 20%"></div>
       </div>
-      <div class="tiles">
-        <div class="tile"><small>Hora</small><div class="val" id="dTime">07:30</div></div>
-        <div class="tile"><small>Irradiância</small><div class="val"><span id="dLux">0</span><u>W/m²</u></div></div>
-        <div class="tile"><small>Ângulo θ₁</small><div class="val"><span id="dPool">45,0</span><u>°</u></div></div>
-        <div class="tile"><small>Ângulo θ₂</small><div class="val"><span id="dCol">28,5</span><u>°</u></div></div>
-        <div class="tile"><small>Δθ medido</small><div class="val"><span id="dDt">16,5</span><u>°</u></div></div>
-        <div class="tile"><small>Índice n</small><div class="val"><span id="dFlow">1,52</span><u>—</u></div></div>
-        <div class="tile off" id="dPumpTile" style="grid-column:span 2"><small>Registro de dados</small><div class="val"><span class="pump-dot"></span><span id="dPump">INATIVO</span></div></div>
-      </div>
-      <ul class="dlog" id="dLog" aria-label="Registro de eventos do sistema">
-        <li class="ok">[07:30] ● Sistema iniciado — sensores calibrados</li>
-      </ul>
+      <span id="quizPontos">⭐ 0 pts</span>
     </div>
 
-    <div class="grid2" style="margin-top:3rem">
-      <pre class="code rv" aria-label="Pseudocódigo do controlador"><code><span class="c">// laço principal — executa a cada 2 s</span>
-<span class="f">ler</span>(angulo_inc, angulo_refr, luz)
-
-<span class="k">se</span> (luz &gt; <span class="n">100</span>):
-    registro = <span class="s">ATIVO</span>          <span class="c">// dados suficientes</span>
-    <span class="f">calcular</span>(n = sen(θ₁)/sen(θ₂))
-<span class="k">senao</span>:
-    registro = <span class="s">INATIVO</span>
-
-servo.<span class="f">ajustar</span>( angulo = <span class="f">f</span>(intensidade) )  <span class="c">// otimização</span>
-telemetria.<span class="f">enviar</span>(dados)</code></pre>
-      <div class="rv" style="--d:.15s">
-        <h3 class="disp" style="font-weight:700;font-size:1.15rem;margin-bottom:.9rem">Por que usar robótica no estudo da óptica?</h3>
-        <p class="lead">A automação permite <strong>medições precisas e repetíveis</strong>. Sensores eletrônicos eliminam erros de leitura humana, enquanto microcontroladores registram milhares de pontos de dados por minuto. O resultado: curvas experimentais que validam as equações teóricas de Snell e Cauchy.</p>
+    <div id="quizConteudo">
+      <p class="quiz-pergunta" id="quizPergunta"></p>
+      <div class="quiz-opcoes" id="quizOpcoes" role="radiogroup"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <div class="quiz-botoes">
+        <button class="quiz-btn" id="quizProxima" disabled>Próxima →</button>
       </div>
+    </div>
+
+    <div id="quizResultado" class="quiz-resultado" style="display: none;">
+      <h3 id="quizTituloResultado">🎉 Quiz Finalizado!</h3>
+      <div class="quiz-placar" id="quizPlacarFinal">0/5</div>
+      <p class="quiz-msg" id="quizMsgFinal"></p>
+      <button class="quiz-btn" id="quizReiniciar">🔄 Jogar Novamente</button>
     </div>
   </div>
 </section>
 
-<!-- ================= 04 PROTÓTIPO ================= -->
-<section id="prototipo">
-  <div class="wrap">
-    <p class="kick">04 / Protótipo &amp; bastidores</p>
-    <h2 class="h2 lm"><span>Do papel à bancada experimental</span></h2>
-    <p class="lead rv">Construímos uma bancada didática com prisma de demonstração, fontes de luz controláveis e circuito eletrônico em protoboard. Registros do processo:</p>
-    <div class="pc-grid">
-      <figure class="pcard rv" style="--r:-3deg;--y:6px"><img src="https://picsum.photos/seed/prototipo-optica/640/480" alt="Bancada experimental com prisma e feixes de luz" loading="lazy"><figcaption>Bancada experimental · prisma + luz</figcaption></figure>
-      <figure class="pcard rv" style="--r:2.4deg;--y:-10px;--d:.1s"><img src="https://picsum.photos/seed/prisma-vidro-espectro/640/480" alt="Prisma de vidro separando a luz em cores sobre uma mesa escura" loading="lazy"><figcaption>Prisma de demonstração · dispersão real</figcaption></figure>
-      <figure class="pcard rv" style="--r:-1.6deg;--y:12px;--d:.2s"><img src="https://picsum.photos/seed/arduino-sensores-robotica/640/480" alt="Placa de desenvolvimento com sensores conectados em protoboard" loading="lazy"><figcaption>Circuito de sensores · protoboard</figcaption></figure>
-      <figure class="pcard rv" style="--r:2deg;--y:-4px;--d:.1s"><img src="https://picsum.photos/seed/medicao-optica/640/480" alt="Instrumentos de medição óptica sobre bancada" loading="lazy"><figcaption>Medição de ângulos · verificação</figcaption></figure>
-      <figure class="pcard rv" style="--r:-2.6deg;--y:10px;--d:.2s"><img src="https://picsum.photos/seed/disco-newton-pintado/640/480" alt="Disco de Newton pintado à mão com sete cores antes de girar" loading="lazy"><figcaption>Disco de Newton · pintado à mão</figcaption></figure>
-      <figure class="pcard rv" style="--r:1.8deg;--y:-8px;--d:.3s"><img src="https://picsum.photos/seed/equipe-projeto/640/480" alt="Equipe de estudantes reunida em volta da bancada no laboratório" loading="lazy"><figcaption>A equipe em ação · laboratório</figcaption></figure>
-    </div>
-  </div>
-</section>
+<section id="experimento" aria-labelledby="titulo-experimento">
+  <h2 id="titulo-experimento" class="reveal"> Experimento Caseiro</h2>
+  <p class="section-intro reveal">Faça você mesmo um experimento simples para observar a dispersão da luz em casa!</p>
 
-<!-- ================= 05 IMPACTO ================= -->
-<section id="impacto" style="background:var(--bg2)">
-  <div class="wrap">
-    <p class="kick">05 / Inovação &amp; impacto educacional</p>
-    <h2 class="h2 lm"><span>Tornando o invisível, visível</span></h2>
-    <p class="lead rv" style="margin-bottom:2.5rem">Nosso projeto não se limita à demonstração de fenômenos físicos: ele cria <strong>ferramentas educacionais acessíveis</strong> que podem ser replicadas em qualquer sala de aula, democratizando o ensino de ciências.</p>
-    <div class="calc">
-      <div class="card rv">
-        <div class="field"><label for="cVol">Custo estimado de replicação (R$)</label><input type="number" id="cVol" value="350" min="50" step="50"></div>
-        <div class="field"><label for="cDt">Número de estudantes beneficiados</label><input type="number" id="cDt" value="120" min="10" max="500" step="10"></div>
-        <p class="mono" style="font-size:.7rem;color:var(--muted)">Premissas: componentes eletrônicos de baixo custo · materiais didáticos reutilizáveis · software livre.</p>
-      </div>
-      <div class="out-grid rv" style="--d:.15s" aria-live="polite">
-        <div class="tile"><small>Custo por estudante</small><div class="val"><span id="oKwh">—</span><u>R$</u></div></div>
-        <div class="tile"><small>Experimentos possíveis</small><div class="val"><span id="oChuv">—</span><u>tipos</u></div></div>
-        <div class="tile"><small>Horas de aula enriquecidas</small><div class="val"><span id="oDias">—</span><u>h</u></div></div>
-        <div class="tile"><small>Escolas potencialmente impactadas</small><div class="val"><span id="oCo2">—</span><u>un</u></div></div>
-      </div>
-    </div>
-    <div class="pillars">
-      <div class="pillar rv" style="--c:var(--green)"><i>🔬</i><h3>Científico</h3><p>Validação experimental das leis de Snell e Cauchy com dados reais coletados por sensores. Cada medição reforça a conexão entre teoria e prática.</p></div>
-      <div class="pillar rv" style="--c:var(--yellow);--d:.1s"><i>📚</i><h3>Educacional</h3><p>Material didático completo, simuladores interativos e código aberto. Qualquer escola pode replicar e adaptar o projeto para suas necessidades.</p></div>
-      <div class="pillar rv" style="--c:var(--cyan);--d:.2s"><i>🤝</i><h3>Social</h3><p>Acessibilidade total garante que estudantes com diferentes necessidades possam participar ativamente do aprendizado de física e tecnologia.</p></div>
-    </div>
-  </div>
-</section>
+  <div class="experimento-box reveal">
+    <h3>🌈 Criando um Arco-íris com um CD</h3>
+    <p style="text-align: center; margin-bottom: 1.5rem; font-size: 1.1rem;">
+      Um CD ou DVD antigo funciona como uma <strong>rede de difração</strong>, separando a luz branca em cores!
+    </p>
 
-<!-- ================= 06 ACESSIBILIDADE ================= -->
-<section id="acessibilidade">
-  <div class="wrap">
-    <p class="kick">06 / Acessibilidade digital</p>
-    <h2 class="h2 lm"><span>Ciência para todos, sem exceção</span></h2>
-    <div class="a11y-grid">
-      <div class="rv">
-        <p class="lead">Acessibilidade não foi um "extra": foi requisito fundamental, seguindo as diretrizes <strong>WCAG 2.1 (nível AA)</strong>. Experimente agora mesmo o botão flutuante no canto inferior esquerdo da tela — ele abre a nossa <strong>barra de acessibilidade</strong> funcional.</p>
-        <ul class="a11y-list">
-          <li><strong>Fonte ajustável</strong> — botões A− / A+ redimensionam o texto inteiro.</li>
-          <li><strong>Alto contraste</strong> — modo preto &amp; branco com contraste máximo.</li>
-          <li><strong>Reduzir movimento</strong> — desliga animações (e também respeitamos a preferência do sistema, <span class="mono">prefers-reduced-motion</span>).</li>
-          <li><strong>Textos alternativos</strong> descrevendo todas as imagens e simuladores.</li>
-        </ul>
+    <h4 style="margin-bottom: 1rem;">📦 Materiais Necessários:</h4>
+    <div class="materiais-lista">
+      <div class="material-item">
+        <div class="icone">💿</div>
+        <div>CD ou DVD velho</div>
       </div>
-      <div class="rv" style="--d:.15s">
-        <ul class="a11y-list" style="margin-top:0">
-          <li><strong>Navegação completa por teclado</strong> — Tab, Enter e Esc funcionam em tudo, com foco sempre visível.</li>
-          <li><strong>"Pular para o conteúdo"</strong> como primeiro link da página.</li>
-          <li><strong>HTML semântico</strong> — cabeçalhos hierárquicos, seções rotuladas, listas e <span class="mono">aria-live</span> nos dados ao vivo.</li>
-          <li><strong>Contraste mínimo AA</strong> em todas as combinações de cor do tema padrão.</li>
-          <li><strong>Idioma pt-BR declarado</strong> e textos em linguagem clara, para leitores de tela e para pessoas também.</li>
-        </ul>
-        <p class="mono" style="font-size:.72rem;color:var(--muted);margin-top:1.4rem">Dica: experimente navegar apenas com a tecla Tab ↹ — o percurso segue exatamente a ordem de leitura.</p>
+      <div class="material-item">
+        <div class="icone">🔦</div>
+        <div>Lanterna ou luz solar</div>
+      </div>
+      <div class="material-item">
+        <div class="icone">📄</div>
+        <div>Folha de papel branco</div>
+      </div>
+      <div class="material-item">
+        <div class="icone">✂️</div>
+        <div>Tesoura (opcional)</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ================= EQUIPE ================= -->
-<section id="equipe" style="padding-top:0">
-  <div class="wrap credits">
-    <p class="kick">07 / Equipe Espectro · Turma 2 P</p>
-    <h2 class="h2 lm"><span>Quem refracionou essa ideia</span></h2>
-    <div class="credit-row rv"><span class="role">Óptica &amp; conteúdo científico</span><span class="name">Guilherme Pietro Prado da Silva</span></div>
-    <div class="credit-row rv" style="--d:.06s"><span class="role">Firmware &amp; sensores</span><span class="name">Mateus Palmeiro Fedalto</span></div>
-    <div class="credit-row rv" style="--d:.12s"><span class="role">Front-end &amp; simuladores</span><span class="name">Constanza Miessa Haygert</span></div>
-    <div class="credit-row rv" style="--d:.18s"><span class="role">Design &amp; experiência do usuário</span><span class="name">Valentina Rodrigues Perottoni</span></div>
+    <div class="passos">
+      <h4 style="margin-bottom: 1rem;">📝 Passo a Passo:</h4>
+      <div class="passo" data-numero="1">
+        <strong>Posicione o CD:</strong> Segure o CD com a face refletiva voltada para você, em um ângulo de aproximadamente 45°.
+      </div>
+      <div class="passo" data-numero="2">
+        <strong>Ilumine:</strong> Aponte a lanterna (ou use a luz do Sol) para a superfície do CD.
+      </div>
+      <div class="passo" data-numero="3">
+        <strong>Observe:</strong> Mova o CD lentamente e observe as cores do arco-íris refletidas na parede ou no papel branco.
+      </div>
+      <div class="passo" data-numero="4">
+        <strong>Experimente:</strong> Tente diferentes ângulos e distâncias para ver como o espectro muda!
+      </div>
+    </div>
+
+    <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem;">
+      <strong> Explicação Científica:</strong><br>
+      As trilhas microscópicas do CD (que armazenam dados) atuam como uma <strong>rede de difração</strong>. Quando a luz incide sobre elas, ocorre interferência construtiva e destrutiva, separando as cores de forma ainda mais eficiente que um prisma!
+    </div>
   </div>
 </section>
 </main>
 
-<!-- ================= RODAPÉ ================= -->
 <footer>
-  <div class="wrap">
-    <div class="f-grid">
-      <div>
-        <h4>Equipe Espectro · Projeto Integrador 2026</h4>
-        <p style="color:var(--muted);font-size:.9rem;max-width:36ch">Dispersão da luz por meio da refração: óptica, robótica e acessibilidade no estudo do espectro eletromagnético. Turma 2 P.</p>
-      </div>
-      <div>
-        <h4>Mapa do site</h4>
-        <ul>
-          <li><a href="#desafio">O desafio</a></li>
-          <li><a href="#optica">Óptica &amp; dispersão</a></li>
-          <li><a href="#sistema">Robótica &amp; medição</a></li>
-          <li><a href="#impacto">Impacto educacional</a></li>
-          <li><a href="#acessibilidade">Acessibilidade</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Referências</h4>
-        <ul>
-          <li><a href="#optica">HEWITT, P. — Física Conceitual</a></li>
-          <li><a href="#optica">TIPLER &amp; MOSCA — Física, v.2</a></li>
-          <li><a href="#acessibilidade">W3C — WCAG 2.1</a></li>
-          <li><a href="#impacto">Arduino — documentação técnica</a></li>
-          <li><a href="#inicio">↑ Voltar ao topo</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="f-note">
-      <span>© 2026 Equipe Espectro · Turma 2 P — feito à mão com HTML + CSS + JavaScript puros.</span>
-      <span>n₁·sen θ₁ = n₂·sen θ₂ ✦ λ ∈ [380, 750] nm</span>
-    </div>
-  </div>
+  <p><strong>🌈 Dispersão da Luz</strong> — Projeto Integrador CEP 2026</p>
+  <p>Desenvolvido com 💜 pela equipe de Física e Óptica da Escola CEP</p>
+  <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+    © 2026 — Explorando as cores da ciência
+  </p>
 </footer>
 
-<!-- ================= BARRA DE ACESSIBILIDADE ================= -->
-<button class="atb-btn" id="atbBtn" aria-expanded="false" aria-controls="atbPanel" aria-label="Abrir ferramentas de acessibilidade">♿</button>
-<div class="atb" id="atbPanel" role="dialog" aria-label="Ferramentas de acessibilidade" hidden>
-  <h3>Acessibilidade</h3>
-  <div class="atb-row">
-    <button class="abtn" id="fMinus" aria-label="Diminuir tamanho da fonte">A−</button>
-    <button class="abtn" id="fReset" aria-label="Tamanho de fonte padrão, atualmente 100 por cento">A</button>
-    <button class="abtn" id="fPlus" aria-label="Aumentar tamanho da fonte">A+</button>
-  </div>
-  <div class="atb-row">
-    <button class="abtn" id="hcBtn" aria-pressed="false">Alto contraste</button>
-  </div>
-  <div class="atb-row">
-    <button class="abtn" id="rmBtn" aria-pressed="false">Reduzir movimento</button>
-  </div>
-  <small>Tamanho da fonte: <span id="fPct">100%</span></small>
-</div>
-
-<noscript><p style="padding:1rem;text-align:center;font-family:monospace">Ative o JavaScript para usar os simuladores interativos — todo o conteúdo textual permanece acessível.</p></noscript>
-
 <script>
-(() => {
-"use strict";
-const prefersRM = matchMedia("(prefers-reduced-motion: reduce)");
-let rmOverride = false;
-const motionOK = () => !(prefersRM.matches || rmOverride);
-const fmt = (x,d=1)=>x.toLocaleString("pt-BR",{minimumFractionDigits:d,maximumFractionDigits:d});
-const SPEC = ["#ff6b6b","#ff9838","#ffd94d","#4ade80","#3ddcff","#6b8cff","#b06bff"];
+  // Menu Mobile
+  const menuBtn = document.getElementById('menuBtn');
+  const menuNav = document.getElementById('menuNav');
 
-/* ---------- barra de progresso ---------- */
-const prog = document.getElementById("progress");
-addEventListener("scroll", () => {
-  const h = document.documentElement;
-  prog.style.width = (h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%";
-}, {passive:true});
+  menuBtn.addEventListener('click', () => {
+    const ativo = menuNav.classList.toggle('ativo');
+    menuBtn.setAttribute('aria-expanded', ativo);
+  });
 
-/* ---------- menu móvel ---------- */
-const menuBtn=document.getElementById("menuBtn"), mclose=document.getElementById("mclose");
-const setNav = open => { document.body.classList.toggle("nav-open",open); menuBtn.setAttribute("aria-expanded",open); menuBtn.setAttribute("aria-label",open?"Fechar menu":"Abrir menu"); };
-menuBtn.addEventListener("click",()=>setNav(true));
-mclose.addEventListener("click",()=>setNav(false));
-document.querySelectorAll(".mnav a").forEach(a=>a.addEventListener("click",()=>setNav(false)));
-addEventListener("keydown",e=>{ if(e.key==="Escape") setNav(false); });
+  document.querySelectorAll('#menuNav a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuNav.classList.remove('ativo');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
 
-/* ---------- scrollspy ---------- */
-const links=[...document.querySelectorAll(".nav-links a")];
-const spy=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){ links.forEach(l=>l.removeAttribute("aria-current"));
-    const l=links.find(l=>l.getAttribute("href")==="#"+e.target.id); if(l) l.setAttribute("aria-current","true"); }
-}),{rootMargin:"-40% 0px -55% 0px"});
-["desafio","optica","sistema","prototipo","impacto","acessibilidade","equipe"].forEach(id=>{const s=document.getElementById(id); if(s) spy.observe(s);});
+  // Modo Escuro
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
 
-/* ---------- efeito scramble ---------- */
-const GLYPHS="ΔλθνπΣΦΨΩ≅∴◊·/01▚▞";
-function scramble(el){
-  const txt=el.dataset.text||el.textContent; el.dataset.text=txt;
-  if(!motionOK()){ el.textContent=txt; return; }
-  let f=0; const total=txt.length*3+10;
-  const iv=setInterval(()=>{
-    f++;
-    el.textContent=txt.split("").map((c,i)=> c===" "?" ": (i< f/2.4 ? c : GLYPHS[(Math.random()*GLYPHS.length)|0])).join("");
-    if(f>total){ el.textContent=txt; clearInterval(iv); }
-  },28);
-}
+  const temaSalvo = localStorage.getItem('tema');
+  if (temaSalvo === 'escuro') {
+    body.classList.add('modo-escuro');
+    themeToggle.textContent = '☀️';
+    themeToggle.setAttribute('aria-label', 'Ativar modo claro');
+  }
 
-/* ---------- contadores ---------- */
-function count(el){
-  const t=parseFloat(el.dataset.count), suf=el.dataset.suffix||"";
-  if(!motionOK()){ el.textContent=t.toLocaleString("pt-BR")+suf; return; }
-  const t0=performance.now(), dur=1400;
-  const step=n=>{ const p=Math.min(1,(n-t0)/dur), e=1-Math.pow(1-p,3);
-    el.textContent=Math.round(t*e).toLocaleString("pt-BR")+suf;
-    if(p<1) requestAnimationFrame(step); };
-  requestAnimationFrame(step);
-}
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('modo-escuro');
+    const escuro = body.classList.contains('modo-escuro');
+    themeToggle.textContent = escuro ? '☀️' : '';
+    themeToggle.setAttribute('aria-label', escuro ? 'Ativar modo claro' : 'Ativar modo escuro');
+    localStorage.setItem('tema', escuro ? 'escuro' : 'claro');
+    desenharPrisma(); // Redesenha o prisma no novo tema
+  });
 
-/* ---------- observador de revelação ---------- */
-const io=new IntersectionObserver(es=>es.forEach(e=>{
-  if(!e.isIntersecting) return;
-  const el=e.target;
-  if(el.classList.contains("rv")||el.classList.contains("lm")) el.classList.add("in");
-  if(el.hasAttribute("data-scramble")) scramble(el);
-  if(el.hasAttribute("data-count")) count(el);
-  io.unobserve(el);
-}),{threshold:.2});
-document.querySelectorAll(".rv,.lm,[data-scramble],[data-count]").forEach(el=>io.observe(el));
-
-/* ---------- HERO: prisma ---------- */
-const hc=document.getElementById("prism");
-if(hc){
-  const ctx=hc.getContext("2d"); let W,H,my=0,myT=0,raf;
-  const size=()=>{ const d=devicePixelRatio||1; W=hc.clientWidth; H=hc.clientHeight; hc.width=W*d; hc.height=H*d; ctx.setTransform(d,0,0,d,0,0); };
-  size(); addEventListener("resize",()=>{size(); draw(0);});
-  hc.parentElement.addEventListener("pointermove",e=>{ const r=hc.getBoundingClientRect(); myT=((e.clientY-r.top)/H-.5)*60; });
-  function draw(t){
-    ctx.clearRect(0,0,W,H);
-    const cx=W*.46, cy=H*.52, s=Math.min(W,H)*.17;
-    const T=[cx,cy-s], A=[cx-s,cy+s*.66], B=[cx+s,cy+s*.66];
-    const f=.46, P1=[T[0]+(A[0]-T[0])*f, T[1]+(A[1]-T[1])*f+my*.3];
-    const P2=[T[0]+(B[0]-T[0])*.52, T[1]+(B[1]-T[1])*.52+my*.2];
-    ctx.beginPath(); ctx.moveTo(...T); ctx.lineTo(...A); ctx.lineTo(...B); ctx.closePath();
-    ctx.fillStyle="rgba(150,170,255,.06)"; ctx.fill();
-    ctx.strokeStyle="rgba(185,200,255,.55)"; ctx.lineWidth=1.6; ctx.stroke();
-    const src=[-20, P1.y-(H*.06)+my];
-    ctx.save(); ctx.shadowColor="rgba(255,255,255,.9)"; ctx.shadowBlur=16;
-    ctx.strokeStyle="#fff"; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(...src); ctx.lineTo(...P1); ctx.stroke(); ctx.restore();
-    ctx.strokeStyle="rgba(255,255,255,.35)"; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(...P1); ctx.lineTo(...P2); ctx.stroke();
-    const base=Math.atan2(.06*H, W*.4)+my*.002;
-    SPEC.forEach((c,i)=>{
-      const ang=base+(i-3)*(0.045+Math.abs(my)*0.0004);
-      const ex=P2[0]+Math.cos(ang)*(W), ey=P2[1]+Math.sin(ang)*(W);
-      ctx.save(); ctx.shadowColor=c; ctx.shadowBlur=14;
-      ctx.strokeStyle=c; ctx.globalAlpha=.95; ctx.lineWidth=2.4;
-      ctx.beginPath(); ctx.moveTo(...P2); ctx.lineTo(ex,ey); ctx.stroke(); ctx.restore();
-      if(motionOK()){
-        for(let k=0;k<3;k++){
-          const p=((t*0.00012*(1+i*.06))+k/3+i*.13)%1;
-          ctx.fillStyle=c; ctx.beginPath();
-          ctx.arc(P2[0]+(ex-P2[0])*p, P2[1]+(ey-P2[1])*p, 2.6, 0, 7); ctx.fill();
-        }
+  // Animações de Scroll
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visivel');
+        revealObserver.unobserve(entry.target);
       }
     });
-    if(motionOK()){ const p=((t*0.0003)%1); ctx.fillStyle="#fff"; ctx.beginPath(); ctx.arc(src[0]+(P1[0]-src[0])*p, src[1]+(P1[1]-src[1])*p, 3, 0, 7); ctx.fill(); }
-  }
-  function loop(t){ my+=(myT-my)*.06; draw(t); if(motionOK()) raf=requestAnimationFrame(loop); }
-  if(motionOK()) raf=requestAnimationFrame(loop); else draw(0);
-}
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-/* ---------- SIMULADOR DE REFRAÇÃO ---------- */
-const rc=document.getElementById("refrCanvas");
-if(rc){
-  const rctx=rc.getContext("2d");
-  const inc=document.getElementById("incAngle"), incVal=document.getElementById("incVal");
-  const amp=document.getElementById("ampDisp");
-  let nBase=1.52, mName="Vidro crown";
-  const size=()=>{ const d=devicePixelRatio||1; rc.width=rc.clientWidth*d; rc.height=430*d; rctx.setTransform(d,0,0,d,0,0); };
-  const nAt=(l)=>nBase+0.0042/(l*l);
-  function draw(){
-    size();
-    const w=rc.clientWidth, h=430, X=w*.5, y0=h*.52, L=Math.min(w,h)*.62;
-    const th1=+inc.value*Math.PI/180;
-    rctx.clearRect(0,0,w,h);
-    rctx.fillStyle="rgba(120,150,255,.035)"; rctx.fillRect(0,0,w,y0);
-    rctx.fillStyle="rgba(61,220,255,.06)"; rctx.fillRect(0,y0,w,h-y0);
-    rctx.strokeStyle="rgba(255,255,255,.5)"; rctx.lineWidth=1.4;
-    rctx.beginPath(); rctx.moveTo(0,y0); rctx.lineTo(w,y0); rctx.stroke();
-    rctx.setLineDash([5,7]); rctx.strokeStyle="rgba(255,255,255,.28)";
-    rctx.beginPath(); rctx.moveTo(X,20); rctx.lineTo(X,h-20); rctx.stroke(); rctx.setLineDash([]);
-    const sx=X-L*Math.sin(th1), sy=y0-L*Math.cos(th1);
-    rctx.save(); rctx.shadowColor="rgba(255,255,255,.8)"; rctx.shadowBlur=12;
-    rctx.strokeStyle="#fff"; rctx.lineWidth=3;
-    rctx.beginPath(); rctx.moveTo(sx,sy); rctx.lineTo(X,y0); rctx.stroke(); rctx.restore();
-    rctx.strokeStyle="rgba(255,255,255,.16)"; rctx.lineWidth=2;
-    rctx.beginPath(); rctx.moveTo(X,y0); rctx.lineTo(X+L*Math.sin(th1), y0-L*Math.cos(th1)); rctx.stroke();
-    const nr=nAt(.65), nv=nAt(.41);
-    const t2r=Math.asin(Math.sin(th1)/nr), t2v=Math.asin(Math.sin(th1)/nv);
-    const t2c=(t2r+t2v)/2, delta=t2v-t2r;
-    const dDraw=amp.checked?Math.max(delta*40,.07):delta;
-    for(let i=0;i<7;i++){
-      const t=t2c+(i/6-.5)*dDraw;
-      const ex=X+L*Math.sin(t), ey=y0+L*Math.cos(t);
-      rctx.save(); rctx.shadowColor=SPEC[i]; rctx.shadowBlur=10;
-      rctx.strokeStyle=SPEC[i]; rctx.lineWidth=2.4;
-      rctx.beginPath(); rctx.moveTo(X,y0); rctx.lineTo(ex,ey); rctx.stroke(); rctx.restore();
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Simulador de Prisma
+  const canvas = document.getElementById('prismaCanvas');
+  const ctx = canvas.getContext('2d');
+
+  const anguloInput = document.getElementById('anguloIncidencia');
+  const indiceInput = document.getElementById('indiceRefacao');
+  const larguraInput = document.getElementById('larguraFeixe');
+
+  const valAngulo = document.getElementById('valAngulo');
+  const valIndice = document.getElementById('valIndice');
+  const valLargura = document.getElementById('valLargura');
+
+  // Cores do espectro
+  const coresEspectro = [
+    { cor: '#ff0000', nome: 'Vermelho', lambda: 700, n: 1.51 },
+    { cor: '#ff7f00', nome: 'Laranja', lambda: 620, n: 1.513 },
+    { cor: '#ffff00', nome: 'Amarelo', lambda: 580, n: 1.515 },
+    { cor: '#00ff00', nome: 'Verde', lambda: 530, n: 1.517 },
+    { cor: '#0000ff', nome: 'Azul', lambda: 470, n: 1.52 },
+    { cor: '#4b0082', nome: 'Anil', lambda: 440, n: 1.522 },
+    { cor: '#9400d3', nome: 'Violeta', lambda: 400, n: 1.525 }
+  ];
+
+  function desenharPrisma() {
+    const isDark = body.classList.contains('modo-escuro');
+    
+    // Limpar canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Fundo
+    ctx.fillStyle = isDark ? '#1e1e32' : '#f8f9fa';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    // Parâmetros
+    const anguloIncidencia = parseFloat(anguloInput.value);
+    const indiceBase = parseFloat(indiceInput.value);
+    const larguraFeixe = parseFloat(larguraInput.value);
+
+    // Desenhar prisma (triângulo equilátero)
+    const ladoPrisma = 150;
+    const alturaPrisma = ladoPrisma * Math.sqrt(3) / 2;
+    
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY - alturaPrisma / 2);
+    ctx.lineTo(centerX - ladoPrisma / 2, centerY + alturaPrisma / 2);
+    ctx.lineTo(centerX + ladoPrisma / 2, centerY + alturaPrisma / 2);
+    ctx.closePath();
+    
+    ctx.fillStyle = isDark ? 'rgba(72, 201, 244, 0.2)' : 'rgba(120, 180, 240, 0.3)';
+    ctx.fill();
+    ctx.strokeStyle = isDark ? '#48cae4' : '#3a0ca3';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // Desenhar feixes de luz
+    const anguloRad = (anguloIncidencia * Math.PI) / 180;
+    const pontoEntradaX = centerX - ladoPrisma / 2 - 100;
+    const pontoEntradaY = centerY;
+
+    coresEspectro.forEach((cor, index) => {
+      // Calcular índice de refração específico para esta cor
+      const n = indiceBase + (cor.n - 1.52) * 0.5;
+      
+      // Lei de Snell: sen(θ2) = sen(θ1) / n
+      const anguloRefacao = Math.asin(Math.sin(anguloRad) / n);
+      
+      // Calcular ponto de saída do prisma
+      const deslocamentoY = Math.tan(anguloRefacao) * ladoPrisma;
+      const pontoSaidaX = centerX + ladoPrisma / 2;
+      const pontoSaidaY = pontoEntradaY + deslocamentoY * 0.5;
+
+      // Desenhar raio incidente (antes do prisma)
+      ctx.beginPath();
+      ctx.moveTo(pontoEntradaX, pontoEntradaY);
+      ctx.lineTo(centerX - ladoPrisma / 2, pontoEntradaY);
+      ctx.strokeStyle = index === 0 ? 'rgba(255,255,255,0.6)' : cor.cor;
+      ctx.lineWidth = index === 0 ? larguraFeixe : 2;
+      if (index === 0) ctx.setLineDash([5, 5]);
+      else ctx.setLineDash([]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Desenhar raio dentro do prisma
+      ctx.beginPath();
+      ctx.moveTo(centerX - ladoPrisma / 2, pontoEntradaY);
+      ctx.lineTo(centerX + ladoPrisma / 2, pontoEntradaY + deslocamentoY * 0.3);
+      ctx.strokeStyle = cor.cor;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Desenhar raio emergente (após o prisma)
+      ctx.beginPath();
+      ctx.moveTo(centerX + ladoPrisma / 2, pontoEntradaY + deslocamentoY * 0.3);
+      ctx.lineTo(canvas.width - 50, pontoSaidaY);
+      ctx.strokeStyle = cor.cor;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Desenhar ponto brilhante no final
+      ctx.beginPath();
+      ctx.arc(canvas.width - 50, pontoSaidaY, 4, 0, Math.PI * 2);
+      ctx.fillStyle = cor.cor;
+      ctx.fill();
+    });
+
+    // Desenhar luz branca incidente
+    ctx.beginPath();
+    ctx.moveTo(pontoEntradaX - 20, pontoEntradaY);
+    ctx.lineTo(pontoEntradaX, pontoEntradaY);
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = larguraFeixe;
+    ctx.setLineDash([5, 5]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Label "Luz Branca"
+    ctx.fillStyle = isDark ? '#e8e8f0' : '#212529';
+    ctx.font = 'bold 14px Segoe UI';
+    ctx.textAlign = 'center';
+    ctx.fillText('Luz Branca', pontoEntradaX - 60, pontoEntradaY - 15);
+
+    // Label "Prisma"
+    ctx.fillText('Prisma', centerX, centerY + alturaPrisma / 2 + 30);
+
+    // Label "Espectro"
+    ctx.fillText('Espectro', canvas.width - 100, centerY - 80);
+
+    // Desenhar ângulo
+    ctx.beginPath();
+    ctx.arc(centerX - ladoPrisma / 2, pontoEntradaY, 40, -Math.PI, -Math.PI + anguloRad);
+    ctx.strokeStyle = '#fb5607';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.fillStyle = '#fb5607';
+    ctx.font = 'bold 12px Segoe UI';
+    ctx.textAlign = 'left';
+    ctx.fillText(`${anguloIncidencia}°`, centerX - ladoPrisma / 2 - 50, pontoEntradaY - 20);
+  }
+
+  // Atualizar simulador
+  function atualizarSimulador() {
+    valAngulo.textContent = anguloInput.value + '°';
+    valIndice.textContent = indiceInput.value;
+    valLargura.textContent = larguraInput.value;
+    desenharPrisma();
+  }
+
+  [anguloInput, indiceInput, larguraInput].forEach(input => {
+    input.addEventListener('input', atualizarSimulador);
+  });
+
+  desenharPrisma();
+
+  // Quiz
+  const perguntas = [
+    {
+      pergunta: "Qual cor da luz visível tem o MAIOR comprimento de onda?",
+      opcoes: ["Violeta", "Verde", "Azul", "Vermelho"],
+      correta: 3,
+      explicacao: "✅ Correto! O vermelho tem aproximadamente 700 nm, enquanto o violeta tem cerca de 400 nm."
+    },
+    {
+      pergunta: "Por que a luz violeta refrata mais que a luz vermelha em um prisma?",
+      opcoes: ["Porque é mais intensa", "Porque tem menor comprimento de onda", "Porque é mais brilhante", "Porque viaja mais rápido"],
+      correta: 1,
+      explicacao: "✅ Exato! Menor comprimento de onda = maior índice de refração = maior desvio angular."
+    },
+    {
+      pergunta: "Qual fenômeno é responsável pela formação do arco-íris?",
+      opcoes: ["Apenas reflexão", "Apenas refração", "Refração + Reflexão interna + Refração", "Difração apenas"],
+      correta: 2,
+      explicacao: "✅ Perfeito! A luz sofre refração na entrada, reflexão interna na gota e refração novamente na saída."
+    },
+    {
+      pergunta: "O que acontece com a velocidade da luz ao entrar em um meio mais denso (como o vidro)?",
+      opcoes: ["Aumenta", "Diminui", "Permanece constante", "Depende da cor apenas"],
+      correta: 1,
+      explicacao: "✅ Isso mesmo! A luz diminui de velocidade em meios mais densos, causando a refração."
+    },
+    {
+      pergunta: "Qual cientista foi pioneiro no estudo da dispersão da luz com prismas?",
+      opcoes: ["Albert Einstein", "Isaac Newton", "Galileu Galilei", "Nikola Tesla"],
+      correta: 1,
+      explicacao: "✅ Correto! Isaac Newton demonstrou em 1666 que a luz branca se decompõe em cores ao passar por um prisma."
     }
-    rctx.strokeStyle="rgba(255,217,77,.8)"; rctx.lineWidth=1.4;
-    rctx.beginPath(); rctx.arc(X,y0,58,-Math.PI/2,-Math.PI/2-th1,true); rctx.stroke();
-    rctx.strokeStyle="rgba(61,220,255,.8)";
-    rctx.beginPath(); rctx.arc(X,y0,58,Math.PI/2,Math.PI/2-t2c,true); rctx.stroke();
-    rctx.font="12px JetBrains Mono, monospace"; rctx.fillStyle="#cfd5ea";
-    rctx.fillText("AR · n₁ = 1,000", 18, 30);
-    rctx.fillText(mName.toUpperCase()+" · n ≈ "+fmt(nBase,3), 18, h-18);
-    rctx.fillStyle="#ffd94d"; rctx.fillText("θ₁="+inc.value+"°", X+8, 44);
-    rctx.fillStyle="#3ddcff"; rctx.fillText("θ₂≈"+fmt(t2c*180/Math.PI,1)+"°", X+8, h-40);
-    if(amp.checked){
-      rctx.fillStyle="#ff6b6b"; rctx.fillText("650 nm", X+L*Math.sin(t2c-dDraw/2)+8, y0+L*Math.cos(t2c-dDraw/2));
-      rctx.fillStyle="#b06bff"; rctx.fillText("410 nm", X+L*Math.sin(t2c+dDraw/2)+8, y0+L*Math.cos(t2c+dDraw/2));
+  ];
+
+  let perguntaAtual = 0;
+  let pontos = 0;
+  let respondida = false;
+
+  const quizPergunta = document.getElementById('quizPergunta');
+  const quizOpcoes = document.getElementById('quizOpcoes');
+  const quizFeedback = document.getElementById('quizFeedback');
+  const quizProxima = document.getElementById('quizProxima');
+  const quizContador = document.getElementById('quizContador');
+  const quizPontos = document.getElementById('quizPontos');
+  const quizBarra = document.getElementById('quizBarra');
+  const quizConteudo = document.getElementById('quizConteudo');
+  const quizResultado = document.getElementById('quizResultado');
+  const quizPlacarFinal = document.getElementById('quizPlacarFinal');
+  const quizMsgFinal = document.getElementById('quizMsgFinal');
+  const quizReiniciar = document.getElementById('quizReiniciar');
+
+  function carregarPergunta() {
+    respondida = false;
+    quizProxima.disabled = true;
+    const p = perguntas[perguntaAtual];
+    quizPergunta.textContent = p.pergunta;
+    quizOpcoes.innerHTML = '';
+    quizFeedback.classList.remove('ativo', 'sucesso', 'erro');
+
+    const letras = ['A', 'B', 'C', 'D'];
+    p.opcoes.forEach((opcao, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opcao';
+      btn.innerHTML = `<span class="quiz-letra">${letras[i]}</span><span>${opcao}</span>`;
+      btn.addEventListener('click', () => responder(i, btn));
+      quizOpcoes.appendChild(btn);
+    });
+
+    quizContador.textContent = `Pergunta ${perguntaAtual + 1} de ${perguntas.length}`;
+    quizPontos.textContent = `⭐ ${pontos} pts`;
+    quizBarra.style.width = `${((perguntaAtual + 1) / perguntas.length) * 100}%`;
+  }
+
+  function responder(indice, btn) {
+    if (respondida) return;
+    respondida = true;
+    const p = perguntas[perguntaAtual];
+    const botoes = quizOpcoes.querySelectorAll('.quiz-opcao');
+
+    botoes.forEach(b => b.disabled = true);
+
+    if (indice === p.correta) {
+      btn.classList.add('correta');
+      pontos++;
+      quizFeedback.textContent = p.explicacao;
+      quizFeedback.className = 'quiz-feedback ativo sucesso';
+    } else {
+      btn.classList.add('errada');
+      botoes[p.correta].classList.add('correta');
+      quizFeedback.textContent = `❌ Resposta correta: ${p.opcoes[p.correta]}. ${p.explicacao.replace('✅ ', '')}`;
+      quizFeedback.className = 'quiz-feedback ativo erro';
     }
-    document.getElementById("rRed").textContent=fmt(t2r*180/Math.PI,2)+"°";
-    document.getElementById("rVio").textContent=fmt(t2v*180/Math.PI,2)+"°";
-    document.getElementById("rDelta").textContent=fmt(delta*180/Math.PI,3)+"°";
-    document.getElementById("rNr").textContent=fmt(nr,4);
-    document.getElementById("rNv").textContent=fmt(nv,4);
-    incVal.textContent=inc.value+"°";
-  }
-  inc.addEventListener("input",draw);
-  amp.addEventListener("change",draw);
-  document.querySelectorAll("[data-n]").forEach(b=>b.addEventListener("click",()=>{
-    document.querySelectorAll("[data-n]").forEach(x=>x.setAttribute("aria-pressed","false"));
-    b.setAttribute("aria-pressed","true"); nBase=+b.dataset.n; mName=b.dataset.name; draw();
-  }));
-  addEventListener("resize",draw); draw();
-}
 
-/* ---------- DISCO DE NEWTON ---------- */
-const dc=document.getElementById("diskC");
-if(dc){
-  const dctx=dc.getContext("2d"), rpmEl=document.getElementById("rpm"), rpmVal=document.getElementById("rpmVal");
-  const swatch=document.getElementById("percSwatch"), percTxt=document.getElementById("percTxt");
-  let rot=0, last=performance.now(), rpm=+rpmEl.value;
-  function paint(){
-    dctx.clearRect(0,0,300,300);
-    for(let i=0;i<7;i++){
-      dctx.beginPath(); dctx.moveTo(150,150);
-      dctx.arc(150,150,140, rot+i*2*Math.PI/7, rot+(i+1)*2*Math.PI/7);
-      dctx.closePath(); dctx.fillStyle=SPEC[i]; dctx.fill();
+    quizPontos.textContent = `⭐ ${pontos} pts`;
+    quizProxima.disabled = false;
+    quizProxima.textContent = perguntaAtual === perguntas.length - 1 ? 'Ver Resultado 🏆' : 'Próxima →';
+  }
+
+  quizProxima.addEventListener('click', () => {
+    perguntaAtual++;
+    if (perguntaAtual < perguntas.length) {
+      carregarPergunta();
+    } else {
+      mostrarResultado();
     }
-    dctx.beginPath(); dctx.arc(150,150,26,0,7); dctx.fillStyle="#0b0e1c"; dctx.fill();
-    dctx.strokeStyle="#fff"; dctx.lineWidth=2; dctx.stroke();
-    dctx.beginPath(); dctx.arc(150,150,140,0,7); dctx.strokeStyle="rgba(255,255,255,.4)"; dctx.lineWidth=2; dctx.stroke();
-  }
-  function updUI(){
-    rpmVal.textContent=rpm+" rpm";
-    const fast=rpm>=90;
-    swatch.style.background=fast?"#f2f1ec":"conic-gradient("+SPEC.concat(SPEC[0]).join(",")+")";
-    percTxt.textContent=fast?"A olho nu: branco por síntese aditiva.":"A olho nu: as sete cores distinguíveis.";
-  }
-  function loop(t){
-    const dt=(t-last)/1000; last=t;
-    if(motionOK()&&rpm>0){ rot+=rpm/60*2*Math.PI*dt; }
-    paint(); requestAnimationFrame(loop);
-  }
-  rpmEl.addEventListener("input",()=>{ rpm=+rpmEl.value; updUI(); if(!motionOK()) paint();
-    document.querySelectorAll("[data-rpm]").forEach(x=>x.setAttribute("aria-pressed",+x.dataset.rpm===rpm)); });
-  document.querySelectorAll("[data-rpm]").forEach(b=>b.addEventListener("click",()=>{
-    rpm=+b.dataset.rpm; rpmEl.value=rpm; updUI();
-    document.querySelectorAll("[data-rpm]").forEach(x=>x.setAttribute("aria-pressed","false"));
-    b.setAttribute("aria-pressed","true"); if(!motionOK()) paint();
-  }));
-  updUI(); paint(); requestAnimationFrame(loop);
-}
+  });
 
-/* ---------- PAINEL DE TELEMETRIA ---------- */
-const dPool=document.getElementById("dPool");
-if(dPool){
-  let mode="auto", pump=false, Tp=26, Tc=26, min=7*60+30, lastPump=false;
-  const el={time:dTime,lux:dLux,pool:dPool,col:dCol,dt:dDt,flow:dFlow,pumpTxt:dPump,tile:dPumpTile,log:dLog,
-    auto:modeAuto,man:modeMan,pumpBtn:pumpBtn};
-  const log=(msg,cls="")=>{ const li=document.createElement("li"); li.className=cls;
-    const hh=String(Math.floor(min/60)%24).padStart(2,"0"), mm=String(Math.floor(min%60)).padStart(2,"0");
-    li.textContent=`[${hh}:${mm}] ${msg}`; el.log.prepend(li);
-    while(el.log.children.length>7) el.log.lastChild.remove(); };
-  el.auto.addEventListener("click",()=>{ mode="auto"; el.auto.setAttribute("aria-pressed","true"); el.man.setAttribute("aria-pressed","false"); el.pumpBtn.hidden=true; log("Modo AUTO ativado — registro automático.","ok"); });
-  el.man.addEventListener("click",()=>{ mode="manual"; el.man.setAttribute("aria-pressed","true"); el.auto.setAttribute("aria-pressed","false"); el.pumpBtn.hidden=false; log("Modo MANUAL ativado — controle humano.","warn"); });
-  el.pumpBtn.addEventListener("click",()=>{ pump=!pump; el.pumpBtn.textContent="Registro: "+(pump?"desativar":"ativar"); });
-  setInterval(()=>{
-    min+=3; const hrs=(Math.floor(min/60)%24)+((min%60)/60);
-    const sun=Math.max(0,Math.sin(Math.PI*(hrs-6)/12));
-    const lux=Math.max(0,Math.round(sun*880+(Math.random()*40-20)));
-    const theta1=45+sun*15;
-    const theta2=theta1/1.52+(Math.random()*.4-.2);
-    if(mode==="auto"){ pump = lux>100; }
-    if(pump!==lastPump){
-      log(pump?`▲ Registro ATIVO — irradiância = ${lux} W/m²`:`▼ Registro inativo — irradiância insuficiente`, pump?"ok":"");
-      lastPump=pump;
-    }
-    const hh=String(Math.floor(min/60)%24).padStart(2,"0"), mm=String(Math.floor(min%60)).padStart(2,"0");
-    el.time.textContent=hh+":"+mm; el.lux.textContent=lux;
-    el.pool.textContent=fmt(theta1); el.col.textContent=fmt(theta2);
-    el.dt.textContent=fmt(theta1-theta2); el.flow.textContent=fmt(1.52,2);
-    el.pumpTxt.textContent=pump?"ATIVO":"INATIVO";
-    el.tile.classList.toggle("on",pump); el.tile.classList.toggle("off",!pump);
-  },1000);
-}
+  function mostrarResultado() {
+    quizConteudo.style.display = 'none';
+    quizResultado.style.display = 'block';
+    quizPlacarFinal.textContent = `${pontos}/${perguntas.length}`;
 
-/* ---------- CALCULADORA ---------- */
-const cVol=document.getElementById("cVol");
-if(cVol){
-  const cDt=document.getElementById("cDt");
-  const calc=()=>{
-    const custo=+cVol.value||0, alunos=+cDt.value||0;
-    const porAluno=custo/alunos;
-    oKwh.textContent=fmt(porAluno,2);
-    oChuv.textContent=fmt(4,0);
-    oDias.textContent=fmt(alunos*0.5,1);
-    oCo2.textContent=fmt(alunos/30,0);
-  };
-  cVol.addEventListener("input",calc); cDt.addEventListener("input",calc); calc();
-}
+    let msg = '';
+    if (pontos === perguntas.length) msg = '🏆 Perfeito! Você domina a dispersão da luz!';
+    else if (pontos >= 4) msg = '🌟 Excelente! Você entende muito bem o fenômeno!';
+    else if (pontos >= 3) msg = ' Bom trabalho! Revise alguns conceitos para melhorar.';
+    else if (pontos >= 2) msg = '📚 Razoável. Que tal reler a seção sobre refração?';
+    else msg = '💪 Não desista! Releia o conteúdo e tente novamente.';
 
-/* ---------- BARRA DE ACESSIBILIDADE ---------- */
-const atbBtn=document.getElementById("atbBtn"), atbPanel=document.getElementById("atbPanel");
-const setPanel=o=>{ atbPanel.hidden=!o; atbBtn.setAttribute("aria-expanded",o); };
-atbBtn.addEventListener("click",()=>setPanel(atbPanel.hidden));
-document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!atbPanel.hidden) setPanel(false); });
-let fs=100; const fPct=document.getElementById("fPct");
-const setFs=v=>{ fs=Math.min(140,Math.max(80,v)); document.documentElement.style.fontSize=(16*fs/100)+"px"; fPct.textContent=fs+"%"; };
-document.getElementById("fPlus").addEventListener("click",()=>setFs(fs+10));
-document.getElementById("fMinus").addEventListener("click",()=>setFs(fs-10));
-document.getElementById("fReset").addEventListener("click",()=>setFs(100));
-const hcBtn=document.getElementById("hcBtn");
-hcBtn.addEventListener("click",()=>{ const on=document.body.classList.toggle("hc"); hcBtn.setAttribute("aria-pressed",on); });
-const rmBtn=document.getElementById("rmBtn");
-rmBtn.addEventListener("click",()=>{ rmOverride=!rmOverride; document.body.classList.toggle("rm",rmOverride); rmBtn.setAttribute("aria-pressed",rmOverride); });
-})();
+    quizMsgFinal.textContent = msg;
+  }
+
+  quizReiniciar.addEventListener('click', () => {
+    perguntaAtual = 0;
+    pontos = 0;
+    quizConteudo.style.display = 'block';
+    quizResultado.style.display = 'none';
+    carregarPergunta();
+  });
+
+  carregarPergunta();
 </script>
+
 </body>
 </html>
