@@ -533,12 +533,12 @@
 </section>
 
 <section id="conceito" aria-labelledby="titulo-conceito">
-  <h2 id="titulo-conceito" class="reveal">🔍 O que é Dispersão da Luz?</h2>
+  <h2 id="titulo-conceito" class="reveal"> O que é Dispersão da Luz?</h2>
   <p class="section-intro reveal">A dispersão da luz é o fenômeno óptico no qual a luz branca (policromática) se decompõe em suas diferentes cores ao atravessar um meio transparente, devido à variação do índice de refração com o comprimento de onda.</p>
 
   <div class="cards-grid">
     <article class="card reveal">
-      <div class="card-icon" aria-hidden="true"></div>
+      <div class="card-icon" aria-hidden="true">🔬</div>
       <h3>Luz Branca</h3>
       <p>A luz do Sol ou de uma lâmpada comum parece branca, mas na verdade é composta por <strong>todas as cores do espectro visível</strong> (vermelho, laranja, amarelo, verde, azul, anil e violeta).</p>
     </article>
@@ -553,7 +553,7 @@
       <p>As cores separadas formam um <strong>espectro contínuo</strong>, indo do vermelho (700 nm) ao violeta (400 nm), passando por todas as cores intermediárias.</p>
     </article>
     <article class="card reveal">
-      <div class="card-icon" aria-hidden="true"></div>
+      <div class="card-icon" aria-hidden="true">📜</div>
       <h3>Descoberta Histórica</h3>
       <p><strong>Isaac Newton</strong> (1666) foi o primeiro a demonstrar experimentalmente a dispersão da luz usando um prisma de vidro, revolucionando o estudo da óptica.</p>
     </article>
@@ -569,7 +569,7 @@
       <h3 style="color: var(--roxo-profundo); margin-bottom: 1rem;">Lei de Snell-Descartes</h3>
       <p>A refração obedece à lei: <strong style="color: var(--roxo-medio); font-size: 1.2rem;">n₁·sen(θ₁) = n₂·sen(θ₂)</strong></p>
       <p>Onde <strong>n</strong> é o índice de refração do meio e <strong>θ</strong> é o ângulo em relação à normal.</p>
-      <p>📌 <strong>Dispersão Cromática:</strong> O índice de refração <strong>n</strong> varia com o comprimento de onda λ. Isso significa que cada cor refrata com um ângulo ligeiramente diferente!</p>
+      <p> <strong>Dispersão Cromática:</strong> O índice de refração <strong>n</strong> varia com o comprimento de onda λ. Isso significa que cada cor refrata com um ângulo ligeiramente diferente!</p>
       <p>📌 <strong>Exemplo no vidro:</strong><br>
       • Violeta (400 nm): n ≈ 1.53<br>
       • Vermelho (700 nm): n ≈ 1.51<br>
@@ -599,9 +599,9 @@
     <div class="controles-simulador">
       <div class="controle-item">
         <label for="anguloIncidencia">
-          Ângulo de Incidência: <span class="valor-display" id="valAngulo">45°</span>
+          Ângulo de Incidência: <span class="valor-display" id="valAngulo">30°</span>
         </label>
-        <input type="range" id="anguloIncidencia" min="0" max="80" value="45">
+        <input type="range" id="anguloIncidencia" min="10" max="60" value="30">
       </div>
       <div class="controle-item">
         <label for="indiceRefacao">
@@ -611,9 +611,9 @@
       </div>
       <div class="controle-item">
         <label for="larguraFeixe">
-          Largura do Feixe: <span class="valor-display" id="valLargura">8</span>
+          Largura do Feixe: <span class="valor-display" id="valLargura">6</span>
         </label>
-        <input type="range" id="larguraFeixe" min="2" max="15" value="8">
+        <input type="range" id="larguraFeixe" min="2" max="12" value="6">
       </div>
     </div>
   </div>
@@ -650,12 +650,12 @@
 </section>
 
 <section id="aplicacoes" aria-labelledby="titulo-aplicacoes">
-  <h2 id="titulo-aplicacoes" class="reveal"> Aplicações Tecnológicas</h2>
+  <h2 id="titulo-aplicacoes" class="reveal">🔬 Aplicações Tecnológicas</h2>
   <p class="section-intro reveal">A dispersão da luz não é apenas um fenômeno bonito — ela permite tecnologias essenciais para ciência e comunicação.</p>
 
   <div class="cards-grid">
     <article class="card reveal">
-      <div class="card-icon" aria-hidden="true">🔭</div>
+      <div class="card-icon" aria-hidden="true"></div>
       <h3>Espectroscopia</h3>
       <p>Instrumentos que analisam a luz dispersa para identificar <strong>elementos químicos</strong> em estrelas, laboratórios e até na atmosfera de planetas distantes.</p>
     </article>
@@ -678,7 +678,7 @@
 </section>
 
 <section id="quiz" aria-labelledby="titulo-quiz">
-  <h2 id="titulo-quiz" class="reveal">🧠 Quiz: Teste seu Conhecimento</h2>
+  <h2 id="titulo-quiz" class="reveal"> Quiz: Teste seu Conhecimento</h2>
   <p class="section-intro reveal">Você entendeu como funciona a dispersão da luz? Responda às 5 perguntas e descubra!</p>
 
   <div class="quiz-container reveal" id="quizContainer" aria-live="polite">
@@ -712,11 +712,11 @@
 <footer>
   <p><strong>🌈 Dispersão da Luz</strong> — Projeto Integrador CEP 2026</p>
   <div class="grupo-info">
-    <h4>👥 Grupo 3</h4>
+    <h4> Grupo 3</h4>
     <ul>
       <li>👤 Guilherme Pietro Prado da Silva</li>
-      <li>👤 Valentina Rodrigues Perottoni</li>
-      <li> Mateus Palmeiro Fedalto</li>
+      <li> Valentina Rodrigues Perottoni</li>
+      <li>👤 Mateus Palmeiro Fedalto</li>
       <li>👤 Constanza Miessa Haygert</li>
     </ul>
   </div>
@@ -772,7 +772,7 @@
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // ===== SIMULADOR DE PRISMA - VERSÃO QUE FUNCIONA =====
+  // ===== SIMULADOR DE PRISMA - VERSÃO CORRETA =====
   const canvas = document.getElementById('prismaCanvas');
   const ctx = canvas.getContext('2d');
 
@@ -784,15 +784,15 @@
   const valIndice = document.getElementById('valIndice');
   const valLargura = document.getElementById('valLargura');
 
-  // 7 cores do arco-íris com dispersão clara
+  // 7 cores do arco-íris
   const coresArcoIris = [
-    { cor: '#FF0000', nome: 'Vermelho', anguloExtra: -0.15 },
-    { cor: '#FF7F00', nome: 'Laranja', anguloExtra: -0.10 },
-    { cor: '#FFFF00', nome: 'Amarelo', anguloExtra: -0.05 },
-    { cor: '#00FF00', nome: 'Verde', anguloExtra: 0.00 },
-    { cor: '#0000FF', nome: 'Azul', anguloExtra: 0.05 },
-    { cor: '#4B0082', nome: 'Anil', anguloExtra: 0.10 },
-    { cor: '#9400D3', nome: 'Violeta', anguloExtra: 0.15 }
+    { cor: '#FF0000', nome: 'Vermelho', desvio: -0.18 },
+    { cor: '#FF7F00', nome: 'Laranja', desvio: -0.12 },
+    { cor: '#FFFF00', nome: 'Amarelo', desvio: -0.06 },
+    { cor: '#00CC00', nome: 'Verde', desvio: 0.00 },
+    { cor: '#0000FF', nome: 'Azul', desvio: 0.06 },
+    { cor: '#4B0082', nome: 'Anil', desvio: 0.12 },
+    { cor: '#9400D3', nome: 'Violeta', desvio: 0.18 }
   ];
 
   function desenharPrisma() {
@@ -815,16 +815,21 @@
     // Posição do prisma
     const prismaX = canvas.width / 2;
     const prismaY = canvas.height / 2 + 20;
-    const tamanhoPrisma = 120;
+    const tamanhoPrisma = 110;
 
-    // Desenhar prisma (triângulo equilátero)
+    // Vértices do prisma (triângulo equilátero)
+    const topo = { x: prismaX, y: prismaY - tamanhoPrisma };
+    const esq = { x: prismaX - tamanhoPrisma * 0.866, y: prismaY + tamanhoPrisma * 0.5 };
+    const dir = { x: prismaX + tamanhoPrisma * 0.866, y: prismaY + tamanhoPrisma * 0.5 };
+
+    // Desenhar prisma
     ctx.beginPath();
-    ctx.moveTo(prismaX, prismaY - tamanhoPrisma);
-    ctx.lineTo(prismaX - tamanhoPrisma * 0.866, prismaY + tamanhoPrisma * 0.5);
-    ctx.lineTo(prismaX + tamanhoPrisma * 0.866, prismaY + tamanhoPrisma * 0.5);
+    ctx.moveTo(topo.x, topo.y);
+    ctx.lineTo(esq.x, esq.y);
+    ctx.lineTo(dir.x, dir.y);
     ctx.closePath();
     
-    const gradPrisma = ctx.createLinearGradient(prismaX, prismaY - tamanhoPrisma, prismaX, prismaY + tamanhoPrisma * 0.5);
+    const gradPrisma = ctx.createLinearGradient(prismaX, topo.y, prismaX, esq.y);
     if (isDark) {
       gradPrisma.addColorStop(0, 'rgba(72, 201, 244, 0.3)');
       gradPrisma.addColorStop(1, 'rgba(72, 201, 244, 0.1)');
@@ -840,24 +845,40 @@
 
     // Parâmetros
     const anguloIncidencia = parseFloat(anguloInput.value);
-    const indiceBase = parseFloat(indiceInput.value);
     const larguraFeixe = parseFloat(larguraInput.value);
 
-    // Ponto de entrada (lado esquerdo do prisma)
-    const entradaX = prismaX - tamanhoPrisma * 0.433;
-    const entradaY = prismaY - tamanhoPrisma * 0.25;
+    // ===== LUZ BRANCA INCIDENTE =====
+    // Origem fixa à esquerda
+    const origemX = 80;
+    const origemY = prismaY;
 
-    // Desenhar feixe de luz branca incidente
+    // Ponto de entrada no prisma (face esquerda)
+    // O feixe segue o ângulo a partir da origem
     const anguloRad = (anguloIncidencia * Math.PI) / 180;
-    const origemX = entradaX - 200;
-    const origemY = entradaY;
+    
+    // Calcular onde o feixe intersecta a face esquerda do prisma
+    // Face esquerda: de topo a esq
+    // Parametrizar face: P = topo + t*(esq - topo), t em [0,1]
+    // Feixe: P = origem + s*(cos(ang), sin(ang))
+    
+    const faceDx = esq.x - topo.x;
+    const faceDy = esq.y - topo.y;
+    const feixeDx = Math.cos(anguloRad);
+    const feixeDy = Math.sin(anguloRad);
+    
+    const det = feixeDx * faceDy - feixeDy * faceDx;
+    const s = ((topo.x - origemX) * faceDy - (topo.y - origemY) * faceDx) / det;
+    
+    const entradaX = origemX + feixeDx * s;
+    const entradaY = origemY + feixeDy * s;
 
+    // Desenhar feixe de luz branca
     ctx.beginPath();
     ctx.moveTo(origemX, origemY);
     ctx.lineTo(entradaX, entradaY);
     ctx.strokeStyle = '#ffffff';
     ctx.lineWidth = larguraFeixe;
-    ctx.shadowColor = 'rgba(255,255,255,0.8)';
+    ctx.shadowColor = 'rgba(255,255,255,0.9)';
     ctx.shadowBlur = 15;
     ctx.stroke();
     ctx.shadowBlur = 0;
@@ -866,36 +887,43 @@
     ctx.fillStyle = isDark ? '#e8e8f0' : '#212529';
     ctx.font = 'bold 14px Segoe UI';
     ctx.textAlign = 'center';
-    ctx.fillText('☀️ Luz Branca', origemX - 30, origemY - 15);
+    ctx.fillText('☀️ Luz Branca', origemX - 10, origemY - 20);
 
-    // Ponto de saída (lado direito do prisma) - cada cor sai de um ponto ligeiramente diferente
-    const saidaBaseX = prismaX + tamanhoPrisma * 0.433;
-    const saidaBaseY = prismaY - tamanhoPrisma * 0.25;
-
-    // Desenhar raios coloridos dentro do prisma (todos seguem o mesmo caminho)
+    // ===== RAIOS DENTRO DO PRISMA =====
+    // Cada cor segue um caminho ligeiramente diferente dentro do prisma
     coresArcoIris.forEach((cor) => {
+      // Dentro do prisma, as cores começam a se separar levemente
+      const anguloInterno = anguloRad * 0.3 + cor.desvio * 0.3;
+      
+      // Ponto de saída na face direita
+      const saidaX = prismaX + tamanhoPrisma * 0.433;
+      const saidaY = prismaY - tamanhoPrisma * 0.25 + cor.desvio * 30;
+
       ctx.beginPath();
       ctx.moveTo(entradaX, entradaY);
-      ctx.lineTo(saidaBaseX, saidaBaseY);
+      ctx.lineTo(saidaX, saidaY);
       ctx.strokeStyle = cor.cor;
       ctx.lineWidth = 2;
-      ctx.globalAlpha = 0.5;
+      ctx.globalAlpha = 0.6;
       ctx.stroke();
       ctx.globalAlpha = 1;
     });
 
-    // Desenhar raios coloridos emergentes COM DISPERSÃO CLARA
+    // ===== RAIOS COLORIDOS EMERGENTES =====
     coresArcoIris.forEach((cor, index) => {
-      // Cada cor tem um ângulo de saída diferente
-      const anguloSaida = anguloRad + cor.anguloExtra + (index - 3) * 0.12;
+      const saidaX = prismaX + tamanhoPrisma * 0.433;
+      const saidaY = prismaY - tamanhoPrisma * 0.25 + cor.desvio * 30;
+
+      // Ângulo de saída com dispersão clara
+      const anguloSaida = anguloRad + cor.desvio * 2;
       
       const distanciaSaida = 280;
-      const fimX = saidaBaseX + Math.cos(anguloSaida) * distanciaSaida;
-      const fimY = saidaBaseY + Math.sin(anguloSaida) * distanciaSaida;
+      const fimX = saidaX + Math.cos(anguloSaida) * distanciaSaida;
+      const fimY = saidaY + Math.sin(anguloSaida) * distanciaSaida;
 
       // Desenhar raio emergente com brilho
       ctx.beginPath();
-      ctx.moveTo(saidaBaseX, saidaBaseY);
+      ctx.moveTo(saidaX, saidaY);
       ctx.lineTo(fimX, fimY);
       ctx.strokeStyle = cor.cor;
       ctx.lineWidth = 4;
@@ -924,7 +952,7 @@
     ctx.fillStyle = isDark ? '#e8e8f0' : '#212529';
     ctx.font = 'bold 16px Segoe UI';
     ctx.textAlign = 'center';
-    ctx.fillText('🔺 Prisma de Vidro', prismaX, prismaY + tamanhoPrisma * 0.5 + 35);
+    ctx.fillText('🔺 Prisma de Vidro', prismaX, esq.y + 35);
 
     // Barra de cores do arco-íris no topo
     const barraLargura = 300;
@@ -947,7 +975,7 @@
     ctx.fillStyle = '#fb5607';
     ctx.font = 'bold 13px Segoe UI';
     ctx.textAlign = 'left';
-    ctx.fillText(`Ângulo: ${anguloIncidencia}°`, origemX + 10, origemY + 25);
+    ctx.fillText(`Ângulo: ${anguloIncidencia}°`, origemX, origemY + 25);
   }
 
   function atualizarSimulador() {
@@ -1058,7 +1086,7 @@
 
     quizPontos.textContent = `⭐ ${pontos} pts`;
     quizProxima.disabled = false;
-    quizProxima.textContent = perguntaAtual === perguntas.length - 1 ? 'Ver Resultado 🏆' : 'Próxima →';
+    quizProxima.textContent = perguntaAtual === perguntas.length - 1 ? 'Ver Resultado ' : 'Próxima →';
   }
 
   quizProxima.addEventListener('click', () => {
@@ -1076,7 +1104,7 @@
     quizPlacarFinal.textContent = `${pontos}/${perguntas.length}`;
 
     let msg = '';
-    if (pontos === perguntas.length) msg = '🏆 Perfeito! Você domina a dispersão da luz!';
+    if (pontos === perguntas.length) msg = ' Perfeito! Você domina a dispersão da luz!';
     else if (pontos >= 4) msg = '🌟 Excelente! Você entende muito bem o fenômeno!';
     else if (pontos >= 3) msg = '👍 Bom trabalho! Revise alguns conceitos para melhorar.';
     else if (pontos >= 2) msg = '📚 Razoável. Que tal reler a seção sobre refração?';
