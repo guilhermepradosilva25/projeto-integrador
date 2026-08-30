@@ -569,7 +569,7 @@
       <h3 style="color: var(--roxo-profundo); margin-bottom: 1rem;">Lei de Snell-Descartes</h3>
       <p>A refração obedece à lei: <strong style="color: var(--roxo-medio); font-size: 1.2rem;">n₁·sen(θ₁) = n₂·sen(θ₂)</strong></p>
       <p>Onde <strong>n</strong> é o índice de refração do meio e <strong>θ</strong> é o ângulo em relação à normal.</p>
-      <p> <strong>Dispersão Cromática:</strong> O índice de refração <strong>n</strong> varia com o comprimento de onda λ. Isso significa que cada cor refrata com um ângulo ligeiramente diferente!</p>
+      <p>📌 <strong>Dispersão Cromática:</strong> O índice de refração <strong>n</strong> varia com o comprimento de onda λ. Isso significa que cada cor refrata com um ângulo ligeiramente diferente!</p>
       <p>📌 <strong>Exemplo no vidro:</strong><br>
       • Violeta (400 nm): n ≈ 1.53<br>
       • Vermelho (700 nm): n ≈ 1.51<br>
@@ -636,7 +636,7 @@
            4. Refração na saída (mais dispersão)</p>
       </article>
       <article class="card" style="background: rgba(255,255,255,0.95); color: #212529;">
-        <div class="card-icon" aria-hidden="true">🎯</div>
+        <div class="card-icon" aria-hidden="true"></div>
         <h3>Ângulo de 42°</h3>
         <p>O arco-íris primário aparece sempre a <strong>42°</strong> do ponto anti-solar (oposto ao Sol). O vermelho fica na parte externa e o violeta na interna.</p>
       </article>
@@ -655,7 +655,7 @@
 
   <div class="cards-grid">
     <article class="card reveal">
-      <div class="card-icon" aria-hidden="true"></div>
+      <div class="card-icon" aria-hidden="true">🔭</div>
       <h3>Espectroscopia</h3>
       <p>Instrumentos que analisam a luz dispersa para identificar <strong>elementos químicos</strong> em estrelas, laboratórios e até na atmosfera de planetas distantes.</p>
     </article>
@@ -678,7 +678,7 @@
 </section>
 
 <section id="quiz" aria-labelledby="titulo-quiz">
-  <h2 id="titulo-quiz" class="reveal"> Quiz: Teste seu Conhecimento</h2>
+  <h2 id="titulo-quiz" class="reveal">🧠 Quiz: Teste seu Conhecimento</h2>
   <p class="section-intro reveal">Você entendeu como funciona a dispersão da luz? Responda às 5 perguntas e descubra!</p>
 
   <div class="quiz-container reveal" id="quizContainer" aria-live="polite">
@@ -700,7 +700,7 @@
     </div>
 
     <div id="quizResultado" class="quiz-resultado" style="display: none;">
-      <h3 id="quizTituloResultado">🎉 Quiz Finalizado!</h3>
+      <h3 id="quizTituloResultado"> Quiz Finalizado!</h3>
       <div class="quiz-placar" id="quizPlacarFinal">0/5</div>
       <p class="quiz-msg" id="quizMsgFinal"></p>
       <button class="quiz-btn" id="quizReiniciar">🔄 Jogar Novamente</button>
@@ -712,10 +712,10 @@
 <footer>
   <p><strong>🌈 Dispersão da Luz</strong> — Projeto Integrador CEP 2026</p>
   <div class="grupo-info">
-    <h4> Grupo 3</h4>
+    <h4>👥 Grupo 3</h4>
     <ul>
       <li>👤 Guilherme Pietro Prado da Silva</li>
-      <li> Valentina Rodrigues Perottoni</li>
+      <li>👤 Valentina Rodrigues Perottoni</li>
       <li>👤 Mateus Palmeiro Fedalto</li>
       <li>👤 Constanza Miessa Haygert</li>
     </ul>
@@ -748,7 +748,7 @@
   const temaSalvo = localStorage.getItem('tema');
   if (temaSalvo === 'escuro') {
     body.classList.add('modo-escuro');
-    themeToggle.textContent = '☀️';
+    themeToggle.textContent = '️';
     themeToggle.setAttribute('aria-label', 'Ativar modo claro');
   }
 
@@ -772,7 +772,7 @@
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // ===== SIMULADOR DE PRISMA - VERSÃO CORRETA =====
+  // ===== SIMULADOR DE PRISMA - VERSÃO FINAL CORRETA =====
   const canvas = document.getElementById('prismaCanvas');
   const ctx = canvas.getContext('2d');
 
@@ -847,30 +847,18 @@
     const anguloIncidencia = parseFloat(anguloInput.value);
     const larguraFeixe = parseFloat(larguraInput.value);
 
-    // ===== LUZ BRANCA INCIDENTE =====
-    // Origem fixa à esquerda
-    const origemX = 80;
-    const origemY = prismaY;
+    // ===== PONTO DE ENTRADA FIXO NO MEIO DA FACE ESQUERDA =====
+    const entradaX = (topo.x + esq.x) / 2;
+    const entradaY = (topo.y + esq.y) / 2;
 
-    // Ponto de entrada no prisma (face esquerda)
-    // O feixe segue o ângulo a partir da origem
+    // ===== LUZ BRANCA INCIDENTE =====
+    // A origem se move conforme o ângulo, mas o feixe SEMPRE entra no prisma
     const anguloRad = (anguloIncidencia * Math.PI) / 180;
+    const distanciaOrigem = 200;
     
-    // Calcular onde o feixe intersecta a face esquerda do prisma
-    // Face esquerda: de topo a esq
-    // Parametrizar face: P = topo + t*(esq - topo), t em [0,1]
-    // Feixe: P = origem + s*(cos(ang), sin(ang))
-    
-    const faceDx = esq.x - topo.x;
-    const faceDy = esq.y - topo.y;
-    const feixeDx = Math.cos(anguloRad);
-    const feixeDy = Math.sin(anguloRad);
-    
-    const det = feixeDx * faceDy - feixeDy * faceDx;
-    const s = ((topo.x - origemX) * faceDy - (topo.y - origemY) * faceDx) / det;
-    
-    const entradaX = origemX + feixeDx * s;
-    const entradaY = origemY + feixeDy * s;
+    // Origem calculada para que o feixe aponte para o ponto de entrada
+    const origemX = entradaX - Math.cos(anguloRad) * distanciaOrigem;
+    const origemY = entradaY - Math.sin(anguloRad) * distanciaOrigem;
 
     // Desenhar feixe de luz branca
     ctx.beginPath();
@@ -887,21 +875,20 @@
     ctx.fillStyle = isDark ? '#e8e8f0' : '#212529';
     ctx.font = 'bold 14px Segoe UI';
     ctx.textAlign = 'center';
-    ctx.fillText('☀️ Luz Branca', origemX - 10, origemY - 20);
+    ctx.fillText('️ Luz Branca', origemX - 20, origemY - 15);
 
     // ===== RAIOS DENTRO DO PRISMA =====
-    // Cada cor segue um caminho ligeiramente diferente dentro do prisma
+    // Ponto de saída na face direita (meio da face)
+    const saidaBaseX = (topo.x + dir.x) / 2;
+    const saidaBaseY = (topo.y + dir.y) / 2;
+
     coresArcoIris.forEach((cor) => {
       // Dentro do prisma, as cores começam a se separar levemente
-      const anguloInterno = anguloRad * 0.3 + cor.desvio * 0.3;
+      const saidaY = saidaBaseY + cor.desvio * 20;
       
-      // Ponto de saída na face direita
-      const saidaX = prismaX + tamanhoPrisma * 0.433;
-      const saidaY = prismaY - tamanhoPrisma * 0.25 + cor.desvio * 30;
-
       ctx.beginPath();
       ctx.moveTo(entradaX, entradaY);
-      ctx.lineTo(saidaX, saidaY);
+      ctx.lineTo(saidaBaseX, saidaY);
       ctx.strokeStyle = cor.cor;
       ctx.lineWidth = 2;
       ctx.globalAlpha = 0.6;
@@ -911,13 +898,13 @@
 
     // ===== RAIOS COLORIDOS EMERGENTES =====
     coresArcoIris.forEach((cor, index) => {
-      const saidaX = prismaX + tamanhoPrisma * 0.433;
-      const saidaY = prismaY - tamanhoPrisma * 0.25 + cor.desvio * 30;
+      const saidaX = saidaBaseX;
+      const saidaY = saidaBaseY + cor.desvio * 20;
 
       // Ângulo de saída com dispersão clara
-      const anguloSaida = anguloRad + cor.desvio * 2;
+      const anguloSaida = anguloRad * 0.5 + cor.desvio * 1.5;
       
-      const distanciaSaida = 280;
+      const distanciaSaida = 250;
       const fimX = saidaX + Math.cos(anguloSaida) * distanciaSaida;
       const fimY = saidaY + Math.sin(anguloSaida) * distanciaSaida;
 
@@ -975,7 +962,7 @@
     ctx.fillStyle = '#fb5607';
     ctx.font = 'bold 13px Segoe UI';
     ctx.textAlign = 'left';
-    ctx.fillText(`Ângulo: ${anguloIncidencia}°`, origemX, origemY + 25);
+    ctx.fillText(`Ângulo: ${anguloIncidencia}°`, origemX, origemY + 30);
   }
 
   function atualizarSimulador() {
@@ -1086,7 +1073,7 @@
 
     quizPontos.textContent = `⭐ ${pontos} pts`;
     quizProxima.disabled = false;
-    quizProxima.textContent = perguntaAtual === perguntas.length - 1 ? 'Ver Resultado ' : 'Próxima →';
+    quizProxima.textContent = perguntaAtual === perguntas.length - 1 ? 'Ver Resultado 🏆' : 'Próxima →';
   }
 
   quizProxima.addEventListener('click', () => {
@@ -1104,8 +1091,8 @@
     quizPlacarFinal.textContent = `${pontos}/${perguntas.length}`;
 
     let msg = '';
-    if (pontos === perguntas.length) msg = ' Perfeito! Você domina a dispersão da luz!';
-    else if (pontos >= 4) msg = '🌟 Excelente! Você entende muito bem o fenômeno!';
+    if (pontos === perguntas.length) msg = '🏆 Perfeito! Você domina a dispersão da luz!';
+    else if (pontos >= 4) msg = ' Excelente! Você entende muito bem o fenômeno!';
     else if (pontos >= 3) msg = '👍 Bom trabalho! Revise alguns conceitos para melhorar.';
     else if (pontos >= 2) msg = '📚 Razoável. Que tal reler a seção sobre refração?';
     else msg = '💪 Não desista! Releia o conteúdo e tente novamente.';
